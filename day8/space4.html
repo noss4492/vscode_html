@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .canvas {
+            background: #aaaaaa;
+        }
+
+    </style>
+    <!-- <script>
+            var bg = new Image();
+            bg.src = "../images/canvas/space.jpg";
+            window.addEventListener('DOMContentLoaded', function(){
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(bg, 0, 0, 400, 600);
+            }, false);
+    </script> -->
+    <script>
+        var bg1 = new Image();
+        var bg2 = new Image();
+        var myship = new Image();
+        var missile1 = new Image();
+        var missile2 = new Image();
+        var enemyShip = new Image();
+        shipImg = [];
+        missileArr = [];
+        missileEnemyArr = [];
+        bg1.src = "../images/canvas/space.jpg";
+        bg2.src = "../images/canvas/space.jpg";
+        missile1.src = "../images/canvas/missile.png";
+        missile2.src = "../images/canvas/missile1.png";
+        for (var i = 0; i < 8; i++) {
+            shipImg[i] = "../images/canvas/gunship" + i + ".png";
+        }
+
+        var enemyShipArr = [];
+        var misArr = [];
+
+        var bg1Y = 0;
+        var bg2Y = 600;
+        var myShipX = 200;
+        var myShipY = 520;
+        var missileX = -150;
+        var missileY = -150;
+
+        var shipSize = 50;
+
+        var bgSpd = 1.85;
+        var missileSpd = 2.5;
+        var counter1 = 0;
+        var stage_flag = 0;
+        var ArrX1;
+        var ArrY1;
+        var score=0;
+
+        var ctx;
+
+        window.onload = function() {
+            var canvas = document.querySelector(".myCanvas");
+            ctx = canvas.getContext("2d");
+            ctx.drawImage(bg1, 0, bg1Y, 600, 800);
+            ctx.drawImage(bg2, 0, bg2Y, 600, 800);
+            setInterval(drawCtx, 10);
+
+            document.body.onkeydown = keyHandler;
+
+            canvas.addEventListener("mousemove", mouseoverHandler);
+            canvas.addEventListener("click", mouseclickHandler);
+            canvas.addEventListener("wheel", mouseclickHandler);
+
+
+            initialDrawEnemyGunship(); // 적기 초기화 7대
+
+            // canvas.addEventListener("dragover", mouseclickHandler); //드래그가 안먹어 ㅠㅠ
+        }
+
+        function drawCtx() { // 지속적으로 실행되는 drawCtx 함수
+            counter1++;
+            bg1Y -= bgSpd;
+            bg2Y -= bgSpd;
+            missileY -= missileSpd;
+            if (bg2Y <= 0) {
+                bg1Y = 0;
+                bg2Y = 800;
+            }
+            ctx.drawImage(missile2, 150, 400, 150, 150);
+            ctx.drawImage(bg1, 0, bg1Y, 600, 800);
+            ctx.drawImage(bg2, 0, bg2Y, 600, 800);
+
+            drawMissile(); // 발사되는 미사일그리기                
+            drawMyGunship(); // 내 건쉽
+
+            if (counter1 % 100 == 0) {
+                makeMissileEnemyArr(); // 상대방 미사일
+            }
+            drawEnemyMissile(); // 상대방 미사일 그리기
+
+            moveEnemyGunShip(); // 상대방 건쉽 좌표 움직임
+            drawEnemyGunship(); // 상대방 건쉽
+            ablePositionCheck(); // 화면내에서만 그리기
+
+            targetDownCheck(); // 미사일과 충돌하였는지
+
+            ctx.fillStyle = "lime"; //"dodgerblue";
+            ctx.font = "25px bold 고딕";
+            ctx.fillText("stage : " + stage_flag, 10, 30);
+
+            ctx.fillStyle = "dodgerblue"; //"dodgerblue";
+            ctx.font = "25px bold 고딕";
+            ctx.fillText("score : " + score*100, 10, 60);
+            ctx.fillText("enemy : " + enemyShipArr.length, 10, 90);
+            ctx.fillText("[test] y     : " + Math.abs(Math.sin(((counter1 / 100) % 360)) * 1), 10, 760);
+            ctx.fillText("[test] +dy : " + Math.sin(counter1 % 420 / 70) * Math.cosh(counter1 % 420 / 70) * 1 / 100
+                        , 10, 790);
+
+        }
+
+        function moveEnemyGunShip() {
+            for (var i = 0; i < enemyShipArr.length; i++) {
+                // abs ( sin(x/70)*cosh(x/70)*100 )
+                // enemyShipArr[i].x += Math.cos(counter1%210/70)*Math.sinh(counter1%210/70)*1;
+                enemyShipArr[i].y += Math.sin(counter1 % 420 / 70) * Math.cosh(counter1 % 420 / 70) * 1 / 100;
+                // console.log(Math.sin(counter1 % 420 / 70) * Math.cosh(counter1 % 420 / 70) * 1 / 100);
+                // console.log(enemyShipArr[i].y);
+                if ((counter1 / 10) % 360 < 180) {
+                    enemyShipArr[i].x -= Math.cos(((counter1 / 100) % 360)) * 1;
+                    enemyShipArr[i].y += Math.abs(Math.sin(((counter1 / 100) % 360)) * 1);
+                } else {
+                    enemyShipArr[i].x -= Math.cos(((counter1 / 100) % 360)) * 1;
+                    enemyShipArr[i].y += Math.abs(Math.sin(((counter1 / 100) % 360)) * 1);
+                }
+            }
+        }
+        //---------------------- Event Handler Start-----------------------//
+        function keyHandler(e) {
+            // console.log(e);  
+            switch (e.code) {
+                case "KeyA":
+                    myShipX -= 10;
+                    break;
+                case "KeyD":
+                    myShipX += 10;
+                    break;
+                case "KeyW":
+                    myShipY -= 10;
+                    break;
+                case "KeyS":
+                    myShipY += 10;
+                    break;
+                case "Space":
+                    //미사일발사
+                    break;
+            }
+        }
+
+        function mouseclickHandler(e) {
+            missileX = e.pageX;
+            missileY = e.pageY;
+            makeMissileArr();
+        }
+
+        function mouseoverHandler(e) {
+            // console.log(e);
+            myShipX = e.pageX - shipSize / 2;
+            myShipY = e.pageY - shipSize / 2;
+        }
+
+        //---------------------- Event Handler End-------------------------//
+
+        function makeMissileArr() {
+            var h = {
+                x: missileX,
+                y: missileY
+            }
+            missileArr.push(h);
+            // console.log(missileArr);
+            drawMissile();
+        }
+
+        // enemy
+        function makeMissileEnemyArr() {
+            for (var i = 0; i < enemyShipArr.length; i++) {
+                var h = {
+                    x: enemyShipArr[i].x,
+                    y: enemyShipArr[i].y
+                }
+                missileEnemyArr.push(h);
+            }
+        }
+
+        function drawEnemyMissile() {
+            for (var i = 0; i < missileEnemyArr.length; i++) {
+                ctx.drawImage(missile2, missileEnemyArr[i].x + shipSize / 2 - 2.5, missileEnemyArr[i].y + shipSize / 2 - 7.5, 5, 15);
+                missileEnemyArr[i].y += 10;
+                if (missileEnemyArr[i].y > 800) {
+                    missileEnemyArr.splice(i, 1);
+                }
+            }
+        }
+        //
+
+        function drawMissile() {
+            for (var i = 0; i < missileArr.length; i++) {
+                ctx.drawImage(missile2, missileArr[i].x, missileArr[i].y, 5, 15);
+                missileArr[i].y -= 10;
+                if (missileArr[i].y < 0) {
+                    missileArr.splice(i, 1);
+                }
+            }
+        }
+
+        function targetDownCheck() {
+            if (enemyShipArr.length > 0) {
+                console.log(enemyShipArr.length);
+                for (var i = 0; i < enemyShipArr.length; i++) {
+                    for (var j = 0; j < missileArr.length; j++) {
+                        var dis = pythagoras(enemyShipArr[i].x + shipSize / 2, enemyShipArr[i].y + shipSize / 2,
+                            missileArr[j].x + 2.5, missileArr[j].y + 7.5);
+                        // 2.5 7.5 is missileSize/2
+                        if (dis < 15) {
+                            enemyShipArr.splice(i, 1);
+                            missileArr.splice(j, 1);
+                            score++;
+                            if (enemyShipArr.length == 0) {}
+                            break;
+                        }
+                    }
+                }
+            } else {
+                switch (stage_flag) {
+                    case 1:
+                        setTimeout(() => {}, 500);
+                        // enemyShipArr.splice(0, enemyShipArr.length);
+                        var arrX1;
+                        var arrY1;
+                        for (var i = 0; i < 10; i++) {
+                            if (i % 2 == 0) {
+                                arrX1 = 150;
+                            } else {
+                                arrX1 = 350;
+                            }
+                            arrY1 = -130 + 50 * i;
+                            generatorEnemyGunship(i, arrX1, arrY1);
+                        }
+                        break;
+                    case 2:
+                        setTimeout(() => {}, 500);
+                        // enemyShipArr.splice(0, enemyShipArr.length);
+                        var arrX1;
+                        var arrY1;
+                        for (var i = 0; i < 10; i++) {
+                            arrX1 = (i * 50);
+                            arrY1 = (i * 50);
+                            generatorEnemyGunship(i, arrX1, arrY1);
+                            // ArrX1.push(Math.floor(Math.random()*500));
+                            // ArrY1.push(Math.floor((-200+Math.random()*200)));
+                        }
+                        break;
+
+                    default:
+                        setTimeout(() => {}, 500);
+                        initialDrawEnemyGunship();
+                }
+                stage_flag++;
+            }
+        }
+
+        function pythagoras(x1, y1, x2, y2) {
+            return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        }
+
+        function drawMyGunship() {
+            if (counter1 % 43 == 0) { // 소수와의 공배수마다 한번씩 (느리게 이미지 변하게)
+                myship.src = shipImg[7 - counter1 % 4];
+            }
+            ctx.drawImage(myship, myShipX, myShipY, shipSize, shipSize);
+        }
+
+        function initialDrawEnemyGunship() {
+            for (var i = 0; i < 7; i++) {
+                var h = {
+                    x: 35,
+                    y: -70
+                };
+                // if(enemyShipArr.length < 7){
+                h.x = 35 + i * 80;
+                enemyShipArr.push(h);
+            }
+        }
+
+        function generatorEnemyGunship(i, posArrX, posArrY) {
+            var h = {
+                x: -100,
+                y: -100
+            };
+            h.X = posArrX;
+            h.y = posArrY;
+            enemyShipArr.push(h);
+        }
+
+        function drawEnemyGunship() {
+            var h = {
+                x: 35,
+                y: 30
+            };
+            if (enemyShipArr.length > 0) {
+                if (counter1 % 43 == 0) { // 소수와의 공배수마다 한번씩 (느리게 이미지 변하게)
+                    enemyShip.src = shipImg[3 - counter1 % 4];
+                }
+                for (var i = 0; i < enemyShipArr.length; i++) {
+                    ableEnemyPositionCheck(i);
+                    ctx.drawImage(enemyShip, enemyShipArr[i].x, enemyShipArr[i].y, shipSize, shipSize);
+                }
+            }
+        }
+
+        function ablePositionCheck() {
+            if (myShipX < 0) {
+                myShipX = 600 - shipSize;
+            } else if (myShipX > 600 - shipSize) {
+                myShipX = 0;
+            }
+        }
+
+        function ableEnemyPositionCheck(i) {
+            // for(var i = 0 ; i < enemyShipArr[i].length; i++){
+            if (enemyShipArr[i].x < -shipSize / 2) {
+                enemyShipArr[i].x = 600 + shipSize / 2;
+            } else if (enemyShipArr[i].x > 600 + shipSize / 2) {
+                enemyShipArr[i].x = -shipSize / 2;
+            }
+            if (enemyShipArr[i].y > 800) {
+                enemyShipArr[i].y = 0;
+            }
+            // }
+        }
+
+    </script>
+</head>
+
+<body>
+    <canvas class="myCanvas" width="600px" height="800px"> </canvas>
+
+
+
+
+</body>
+
+</html>

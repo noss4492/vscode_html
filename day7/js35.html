@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function Person(name, age, gender, job){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.job = job;
+            // 자바의 생성자 처럼
+            this.isAdult = function(){
+                var result;
+                if(this.age>18){
+                    result = "성인";
+                }else{
+                    result = "미성년";
+                }
+                console.log(this.name+"씨는"+result+"임");
+            }
+        }
+
+        var sin = new Person("신", 14, "여", "복권당첨");
+        console.log(sin);
+
+        var nan = new Person("난", 10, "남", "광부");
+        sin.isAdult();
+        nan.isAdult();
+
+
+        /////////////////////////////////
+
+        function Person2(){
+            // 자바의 생성자 처럼
+        }
+            Person2.prototype.name = "신2";
+            Person2.prototype.age = 14;
+            Person2.prototype.gender = "여여";
+            Person2.prototype.job = "복";
+        var sin2 = new Person2();
+        console.log(sin2.name);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

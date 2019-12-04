@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+    <script>
+        var starPath = "../images/Starsinthesky.jpg";
+        var bgPath = "../images/canvas/bg.jpg";
+        var bgImg = new Image();
+        var bgImg2 = new Image();
+        bgImg.src=bgPath;
+        bgImg2.src=bgPath;
+
+        var rabitImg = new Image();
+        var rabitImg2 = new Image();
+        var snipe = new Image();
+        var hole = new Image();
+        rabitImg.src = "../images/canvas/rabbit1.png";
+        rabitImg2.src = "../images/canvas/rabbit2.png";
+        snipe.src = "../images/canvas/snipe.png";
+        hole.src = "../images/canvas/hole.png";
+
+        var snipeSize = 150;
+        var rabbitSize = 70;
+        var holeSize = 35;
+        var ctx;
+        var counter = 0;
+        var counter2 = 0;
+        var bgX = 0;
+        var bg2X = 800;
+        var rabbitX = 250;
+        var rabbitY = 350;
+        var snipeX = 250;
+        var snipeY = 350;
+        var holeX = -300;
+        var holeY = -300;
+        // ' 3' ...;;
+        var bgMusic = new Audio("../sounds/backsound.mp3");
+        var fireSound = new Audio("../sounds/fire.wav");
+
+        var canvas;
+
+
+        window.onload = function(){
+            canvas = document.getElementsByName("myCanvas")[0];
+            ctx = canvas.getContext("2d");
+            ctx.drawImage(bgImg, 0, 0, 800, 600);
+            
+            
+            // body 태그 객체 얻어오기
+            var body = document.body;
+            console.dir(body);
+            body.onkeydown = moveRabbit;    // () 있으면 호출한거가 됨 
+            // 캔버스위에서 마우스가 움직일떄
+            // 조준경을 움직이게
+            canvas.onmousemove = moveSnipe;
+            canvas.onmousedown = fire;
+            // function mouseMoveHandler(){
+            //     //동작할 내용
+            // }
+            // canvas.addEventListener('mouseover', mouseMoveHandler, false);
+            
+            window.setInterval(drawScreen, 10);
+        }
+        
+        function moveSnipe(e){
+            // console.log(e);
+            snipeX = e.pageX-snipeSize/2;
+            snipeY = e.pageY-snipeSize/2;
+        }
+
+        function drawScreen(){
+            counter++;
+            bgX-=5;
+            bg2X-=5;
+            if(Math.random()>=0.5){
+                rabbitX += Math.random()*10;
+                rabbitY += Math.random()*10;
+            }else{
+                rabbitX -= Math.random()*10;
+                rabbitY -= Math.random()*10;
+            }
+
+
+            if(bg2X<=0){
+                bgX = 0;
+                bg2X = 800;
+            }
+            // if(bgX<=-800){
+            //     console.log("a");
+            //     bgX=800;
+            //     bg2X=0;
+            // }
+            // if(counter%300==0)
+                ctx.drawImage(bgImg, bgX, 0, 800, 600);
+                ctx.drawImage(bgImg2, bg2X, 0, 800, 600);
+                
+                // console.log("X:["+rabbitX+"], Y:["+rabbitY+"]"+"cnt:["+counter+"]"); //좌표
+                if(counter%2 == 1){
+                    ctx.drawImage(rabitImg, rabbitX, rabbitY, rabbitSize, rabbitSize);
+                } else{
+                    ctx.drawImage(rabitImg2, rabbitX, rabbitY, rabbitSize, rabbitSize);
+                }
+
+                // canvas.onclick = digHole;
+                // var myTimer = setTimeout(function(){
+                //     holeX=-300;
+                //     holeY=-300;
+                // }, 500);
+                // if(myTimer.!=true){
+                //     myTimer();
+                // }
+
+                
+                ctx.drawImage(hole, holeX-holeSize/2, holeY-holeSize/2, holeSize, holeSize);
+                ctx.drawImage(snipe, snipeX, snipeY, snipeSize, snipeSize);
+
+
+            // 반시계방향 회전
+            // rabbitX = Math.sin(counter%360)*100;
+            // rabbitY = Math.cos(counter%360)*100;
+            
+            // 시계방향 회전
+            // rabbitX = -Math.sin(counter%360)*100;
+            // rabbitY = -Math.cos(counter%360)*100;
+
+            // rabbitX = Math.abs(Math.sin(counter%360))*150+250;
+            // rabbitY = Math.abs(Math.cos(counter%360))*150+250;
+            
+            // 3단 원
+            // if(counter % 3 == 1 ){
+            //     rabbitX = -Math.sin(counter%360+1)*50+350;
+            //     rabbitY = -Math.cos(counter%360+1)*50+270;
+            // }else if(counter % 3 == 2){
+            //     rabbitX = -Math.sin(counter%360+1)*100+350;
+            //     rabbitY = -Math.cos(counter%360+1)*100+270;
+            // }else{
+            //     rabbitX = -Math.sin(counter%360+1)*150+350;
+            //     rabbitY = -Math.cos(counter%360+1)*150+270;
+            // }
+
+            // 원
+            // if(counter % 360==0){
+            //     counter2 += 10;
+            // }
+            // rabbitX = -Math.sin(counter%360+1)*counter2+350;
+            // rabbitY = -Math.cos(counter%360+1)*counter2+270;
+
+
+            if(rabbitX >= 750){
+                rabbitX = 0;
+            } else if(rabbitX <= 0){
+                rabbitX = 750;
+            }
+            if(rabbitY >= 600){
+                rabbitY = 0;
+            } else if(rabbitY <=0){
+                rabbitY = 600;
+            }
+        }
+        function moveRabbit(event){ // event or e
+            console.log("눌림");
+            console.log(event);
+           
+           if(event.keyCode == 38)
+                rabbitY -= 10;
+           else if(event.keyCode == 39)
+                  rabbitX +=10;
+            else if(event.keyCode == 40)
+                rabbitY +=10;
+            else if(event.keyCode == 37)
+                rabbitX -=10;
+
+
+            if(rabbitX >= window.innerWidth){
+                rabbitX = 0;
+            } else if(rabbitX <= 0){
+                rabbitX = window.innerWidth;
+            }
+            if(rabbitY >= window.innerHeight){
+                rabbitY = 0;
+            } else if(rabbitY <=0){
+                rabbitY = window.innerHeight;
+            }
+        }
+        // function digHole(){
+        //     var myVar = setTimeout(function(){
+        //         clearInterval(myHole);
+        //     },1000);
+        //     var myHole = window.setInterval(function(){
+        //         holeX = snipeX;
+        //         holeY = snipeY;
+        //         ctx.drawImage(hole, holeX, holeY, 50, 50);
+        //     }, 1);
+        // }
+        function startMusic(){
+            console.log("배경음악 나오는중");
+            bgMusic.play();
+        }
+        function stopMusic(){
+            console.log("배경음악 중지");
+            // bgMusic.play()==null; 안되네
+            bgMusic.currentTime=0;
+            bgMusic.pause();
+        }
+        function fire(e){
+            //총소리
+            fireSound.currentTime=0;
+            fireSound.play();
+            console.log("bang");
+            holeX = e.pageX;
+            holeY = e.pageY;
+        }
+    </script>
+</head>
+<body>
+    <canvas name="myCanvas" width="800px" height="600px">
+    </canvas>
+    <br />
+    <input type="button" value="BGM시작" onclick="startMusic();">
+    <input type="button" value="BGM종료" onclick="stopMusic();"><br />  
+</body>
+</html>

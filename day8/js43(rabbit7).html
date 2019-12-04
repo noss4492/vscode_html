@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+    <script>
+        var starPath = "../images/Starsinthesky.jpg";
+        var bgPath = "../images/canvas/bg.jpg";
+        var bgImg = new Image();
+        var bgImg2 = new Image();
+        var rabitImg = new Image();
+        var rabitImg2 = new Image();
+        var snipe = new Image();
+        var hole = new Image();
+        
+        bgImg.src=bgPath;
+        bgImg2.src=bgPath;
+        rabitImg.src = "../images/canvas/rabbit1.png";
+        rabitImg2.src = "../images/canvas/rabbit2.png";
+        snipe.src = "../images/canvas/snipe.png";
+        hole.src = "../images/canvas/hole.png";
+
+        var snipeSize = 150;
+        var rabbitSize = 70;
+        var holeSize = 35;
+        var ctx;
+        var counter = 0;
+        var counter2 = 0;
+        var bgX = 0;
+        var bg2X = 800;
+        var rabbitX = 250;
+        var rabbitY = 350;
+        var snipeX = 250;
+        var snipeY = 350;
+        var holeX = -300;
+        var holeY = -300;
+        var rX = 0;
+        var rY = 0;
+        var reboundY = 0;
+        var score = 0;
+        
+        var holeArray = [];
+
+        // ' 3' ...;;
+        var bgMusic = new Audio("../sounds/backsound.mp3");
+        var fireSound = new Audio("../sounds/fire2.wav");
+        var scream = new Audio("../sounds/sfx_sounds_falling5.wav");
+        var reloadSound = new Audio("../sounds/reload.wav");
+
+        var canvas;
+        // var drawIntervalHandler;
+        var fire_cnt = 0;
+
+        // 재장전인지 판단하는 함수
+        var isReload = false;
+
+        window.onload = function(){
+            canvas = document.getElementsByName("myCanvas")[0];
+            ctx = canvas.getContext("2d");
+            ctx.drawImage(bgImg, 0, 0, 800, 600);
+            
+            // body 태그 객체 얻어오기
+            var body = document.body;
+            console.dir(body);
+            body.onkeydown = moveRabbit;    // () 있으면 호출한거가 됨 
+            // 캔버스위에서 마우스가 움직일떄
+            // 조준경을 움직이게
+            canvas.onmousemove = moveSnipe;
+            canvas.onmousedown = fire;
+            // function mouseMoveHandler(){
+            //     //동작할 내용
+            // }
+            // canvas.addEventListener('mouseover', mouseMoveHandler, false);
+            
+            // drawIntervalHandler = window.setInterval(drawScreen, 10);
+            window.setInterval(drawScreen, 10);
+        }
+
+        function randomPosition(){
+            rabbitX = Math.floor(Math.random()*700);
+            rabbitY = Math.floor(Math.random()*500);
+        }
+        
+        function moveSnipe(e){
+            // console.log(e);
+            snipeX = e.pageX-snipeSize/2;
+            snipeY = e.pageY-snipeSize/2;
+        }
+
+        function drawScreen(){
+            counter++;
+            bgX-=5;
+            bg2X-=5;
+            
+            // if(counter%(30+Math.floor(Math.random()*100))==0){
+                rX = Math.random()*15;
+                rY = Math.random()*15;
+                // rX = 0;
+                // rY = 0;
+                // // }
+                // rabbitX += rX;
+            if(Math.random()>=0.5){
+                rabbitX += rX;
+                rabbitY += rY;
+            }else{
+                rabbitX -= rX;
+                rabbitY -= rY;
+            }
+
+            if(counter%100==0){
+                randomPosition();
+            }
+
+
+            if(bg2X<=0){
+                bgX = 0;
+                bg2X = 800;
+            }
+            // if(bgX<=-800){
+            //     console.log("a");
+            //     bgX=800;
+            //     bg2X=0;
+            // }
+            // if(counter%300==0)
+                ctx.drawImage(bgImg, bgX, 0, 800, 600);
+                ctx.drawImage(bgImg2, bg2X, 0, 800, 600);
+                
+                // console.log("X:["+rabbitX+"], Y:["+rabbitY+"]"+"cnt:["+counter+"]"); //좌표
+                if(counter%2 == 1){
+                    ctx.drawImage(rabitImg, rabbitX, rabbitY, rabbitSize, rabbitSize);
+                } else{
+                    ctx.drawImage(rabitImg2, rabbitX, rabbitY, rabbitSize, rabbitSize);
+                }
+
+                ctx.fillStyle="dodgerblue";
+                ctx.font = "35px bold 고딕";
+                var tmpScore = 0;
+                if(fire_cnt>0){
+                    tmpScore = score*100*(score/fire_cnt);
+                }
+                ctx.fillText("SCORE : " + tmpScore.toFixed(1), 300,50);
+                
+                ctx.fillStyle="red";
+                ctx.font = "25px bold 고딕";
+                ctx.fillText("fire : " + fire_cnt, 700,30);
+               
+                ctx.fillStyle="dodgerblue";
+                ctx.font = "25px bold 고딕";
+                ctx.fillText("Hit : " + score, 700,60);
+
+                ctx.fillStyle="black";
+                ctx.font = "25px bold 고딕";
+                ctx.fillText("Bullet : " + (6-fire_cnt%6)+"/6", 0,590);
+
+                ctx.fillStyle="orange";
+                ctx.font = "25px bold 고딕";
+                if(!(fire_cnt==0)){
+                    ctx.fillText("acc : " + Math.floor(score/fire_cnt*100)+"%", 5,25);
+                }
+
+                // canvas.onclick = digHole;
+                // var myTimer = setTimeout(function(){
+                //     holeX=-300;
+                //     holeY=-300;
+                // }, 500);
+                // if(myTimer.!=true){
+                //     myTimer();
+                // }
+
+                // for(var i = 0; i < holeArray.length; i ++){
+                //     holeArray[i].x = rabbitX + rabbitSize/2;
+                //     holeArray[i].y = rabbitY + rabbitSize/2;
+                // }
+                    
+                // ctx.drawImage(hole, holeX-holeSize/2, holeY-holeSize/2, holeSize, holeSize);
+                for(var i = 0 ; i < holeArray.length; i++){
+                    // var h = holeArray[i];
+                    // ctx.drawImage(hole, h.x-holeSize/2, h.y-holeSize/2, holeSize, holeSize);
+                    ctx.drawImage(hole, holeArray[i].x+rabbitX-holeX/2, holeArray[i].y+rabbitY-holeY/2,
+                                                                                     holeSize, holeSize);
+                }
+                
+                // ctx.drawImage(snipe, snipeX, snipeY-reboundY, snipeSize, snipeSize);
+                if(reboundY>0){
+                    reboundY -= 2;
+                    ctx.drawImage(snipe, snipeX, snipeY-reboundY, snipeSize, snipeSize);
+                } else{
+                    ctx.drawImage(snipe, snipeX, snipeY, snipeSize, snipeSize);
+                }
+
+                // 수업중엔 동작하는 구문
+                // if(reboundY<2){
+                //     if(isReload){
+                //         reloadSound.currentTime = 0;
+                //         reloadSound.play();
+                //     }
+                //     reboundY = 0;
+                //     isReload = false;
+                // }
+                // reboundY--;
+          
+            // 반시계방향 회전
+            // rabbitX = Math.sin(counter%360)*100;
+            // rabbitY = Math.cos(counter%360)*100;
+            
+            // 시계방향 회전
+            // rabbitX = -Math.sin(counter%360)*100;
+            // rabbitY = -Math.cos(counter%360)*100;
+
+            // rabbitX = Math.abs(Math.sin(counter%360))*150+250;
+            // rabbitY = Math.abs(Math.cos(counter%360))*150+250;
+            
+            // 3단 원
+            // if(counter % 3 == 1 ){
+            //     rabbitX = -Math.sin(counter%360+1)*50+350;
+            //     rabbitY = -Math.cos(counter%360+1)*50+270;
+            // }else if(counter % 3 == 2){
+            //     rabbitX = -Math.sin(counter%360+1)*100+350;
+            //     rabbitY = -Math.cos(counter%360+1)*100+270;
+            // }else{
+            //     rabbitX = -Math.sin(counter%360+1)*150+350;
+            //     rabbitY = -Math.cos(counter%360+1)*150+270;
+            // }
+
+            // 원
+            // if(counter % 360==0){
+            //     counter2 += 10;
+            // }
+            // rabbitX = -Math.sin(counter%360+1)*counter2+350;
+            // rabbitY = -Math.cos(counter%360+1)*counter2+270;
+
+
+            if(rabbitX >= 750){
+                rabbitX = 0;
+            } else if(rabbitX <= 0){
+                rabbitX = 750;
+            }
+            if(rabbitY >= 550){
+                rabbitY = 0;
+            } else if(rabbitY <=0){
+                rabbitY = 550;
+            }
+        }
+
+        function pytagoras(x1, y1, x2, y2){
+            return ( Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) ) ;
+        }
+
+        function moveRabbit(event){ // event or e
+            // console.log("눌림");
+            // console.log(event);
+           
+           if(event.keyCode == 38)
+                rabbitY -= 10;
+           else if(event.keyCode == 39)
+                  rabbitX +=10;
+            else if(event.keyCode == 40)
+                rabbitY +=10;
+            else if(event.keyCode == 37)
+                rabbitX -=10;
+
+
+            if(rabbitX >= window.innerWidth){
+                rabbitX = 0;
+            } else if(rabbitX <= 0){
+                rabbitX = window.innerWidth;
+            }
+            if(rabbitY >= window.innerHeight){
+                rabbitY = 0;
+            } else if(rabbitY <=0){
+                rabbitY = window.innerHeight;
+            }
+        }
+        // 안되네
+        // function digHole(){
+        //     var myVar = setTimeout(function(){
+        //         clearInterval(myHole);
+        //     },1000);
+        //     var myHole = window.setInterval(function(){
+        //         holeX = snipeX;
+        //         holeY = snipeY;
+        //         ctx.drawImage(hole, holeX, holeY, 50, 50);
+        //     }, 1);
+        // }
+        function startMusic(){
+            console.log("배경음악 나오는중");
+            bgMusic.play();
+        }
+        function stopMusic(){
+            console.log("배경음악 중지");
+            // bgMusic.play()==null; 안되네
+            bgMusic.currentTime=0;
+            bgMusic.pause();
+        }
+
+        function fire(e){
+            if(isReload){
+                return;
+            }
+            isReload = true;
+            reboundY = 50;
+            //총소리
+            fireSound.currentTime=0;
+            fireSound.play();
+            // console.log("bang");
+            
+            // var dis = pytagoras(rabbitX+rabbitSize/2, rabbitY+rabbitSize/2, holeX, holeY);
+            var dis = pytagoras(rabbitX+rabbitSize/2, rabbitY+rabbitSize/2, e.pageX, e.pageY);
+            console.log(dis);
+            if(dis <= 55){
+                fire_cnt++;
+                if(fire_cnt%6==0){
+                    setTimeout(() => {
+                        reloadSound.currentTime=0;
+                        reloadSound.play();
+                        isReload = false;
+                    }, 470);
+                }else{
+                    isReload = false;
+                }
+                holeX = e.pageX;
+                holeY = e.pageY;
+                console.log("명중함");
+                score++;
+                setTimeout(() => {
+                    scream.currentTime=0;
+                    scream.play();
+                }, 500);
+                // setTimeout(function(){
+                // },500)
+                holeX -= rabbitX;
+                holeY -= rabbitY;
+                var h = {
+                    x : holeX,
+                    y : holeY
+                }
+                holeArray.push(h);
+                setTimeout(() => {
+                    holeArray.splice(holeArray.length-1);
+                }, 1000);
+                randomPosition();
+                // setTimeout(() => {
+                //     clearInterval(drawIntervalHandler);
+                // }, 499);
+            } else{
+                isReload = true;
+                fire_cnt++;
+                if(fire_cnt%6==0){
+                    setTimeout(() => {
+                        reloadSound.currentTime=0;
+                        reloadSound.play();
+                        isReload = false;
+                    }, 470);
+                }else{
+                    isReload = false;
+                }
+            }
+
+            // hole 객체를 여기서 생성하기로 함
+            // json 경량 데이터 교환형식 notation
+            // console.log(h);
+            // console.log(holeArray);
+
+            // 안되네 remove대신에 Splice를 쓰면 되는 문제였음. 인덱스가 줄어들어서 붙네
+            // setTimeout(() => {
+            //         if(holeArray.length>=1){
+            //             holeArray.remove(holeArray.length-1);
+            //         }
+            // }, 500);
+            // setTimeout(function(){
+            //     if(holeArray.length>=1){
+            //             holeArray.remove(holeArray.length-1);
+            //         }
+            // },500);
+        }
+    </script>
+</head>
+<body>
+    <canvas name="myCanvas" width="800px" height="600px">
+    </canvas>
+    <br />
+    <input type="button" value="BGM시작" onclick="startMusic();">
+    <input type="button" value="BGM종료" onclick="stopMusic();"><br />  
+</body>
+</html>

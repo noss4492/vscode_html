@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*    각 div영역의 너비 230px 250px 오렌지*/
+        div {
+            width: 14.375rem;
+            height: 15.625rem;
+            background-color: orange;
+        }
+
+        #div1 {
+            border: 0.0625rem solid black;
+            /*            padding-top: 200px;*/
+            /*            margin:10PX; 모두 */
+            /*            margin:0px auto; 상하 좌우 */
+            /*            margin:10px 20px 30px 40px; 상우하좌*/
+            /*            margin : 0px auto;   << 요러케 많이 쓰는듯? */
+            margin: 30px auto;
+        }
+
+        /*        id가 div2영역 핑크/ 50x50/ */
+        #div2 {
+            background-color: hotpink;
+            width: 3.125rem;
+            height: 3.125rem;
+            margin: 1.875rem;
+            padding: 40px 20px 40px 20px;
+            border: 3px dotted blue;
+            margin: auto auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!--    div#div1>input:text*2-->
+    <div id="div1">
+        ID : <input type="text" name="id" id="">
+        <br />
+        PW : <input type="text" name="pwd" id="">
+    </div>
+    <div id="div2">box2</div>
+
+</body></html>

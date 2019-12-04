@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height:100px;
+        }
+        div#box1{
+            background: red;
+            display:inline;
+        }
+        div#box2{
+            background: blue;
+        }
+        span{
+            background: yellow;
+            width:150px;
+            height:150px;
+            display: block;
+        }
+        span:hover{
+            background: green;
+        }
+        span:active{
+            background: blue;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="box1">푸른하늘</div>
+    </div>  
+    <div>
+        <div id="box2">은하수</div>
+    </div>
+    <span>span은 inline요소</span>
+
+    <!--     
+        div>div#box1{푸른하늘}
+    div>div#box2{은하수}
+    span{span은 inline요소}
+     -->
+</body>
+</html>

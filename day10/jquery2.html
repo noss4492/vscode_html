@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jquery-3.4.1.js">
+    </script>
+    <script>
+        $(document).ready(function(){
+            console.log("ha1");
+            
+        });
+        $(document).ready(function(){
+            console.log("ha2");
+        });
+        // 간결하게 이렇게 씀
+        $(function(){
+            console.log("ha3");
+        });
+
+
+        $(function(){
+            $("#container").css("width", "300px").css("height", "300px").css("color", "#dd22dd").css("display","inline-block");
+            $("#container").css("background", "#22ddff"); 
+
+            // 1. 그냥 메서드 체이닝으로
+            $("#div2").css("width","150px").css("height","150px").css("background","lime").css("font-size","10px").css("display","inline-block"); 
+            // 2. json 타입으로도 써줄 수 있음.
+            $("#div2").css({
+                "background":"blue",
+                "width":"150px",
+                "height":"150px"
+            });
+        });
+    </script>
+    <style>
+    /* *{
+        width:fit-content
+    } */
+    </style>
+</head>
+<body>
+    <div id="div2">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe iusto laborum veniam necessitatibus assumenda quisquam nesciunt molestias! Voluptatibus molestiae pariatur, laboriosam nisi officia vitae atque rerum. Porro totam delectus enim?   
+    </div>
+    <div id="container">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum iusto consequatur fugit minima vero ducimus aut ea sunt. Eligendi harum, suscipit adipisci repudiandae aperiam accusamus ratione expedita id modi magni.
+    </div>
+    <script>
+            
+            
+            // .css("background","blue").css("color", "red").css("display", "inline-block");
+            // .css("background", "pink").css("width", "300px").css("height", "300px").css("display", "block");
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            font-size: 50%;
+        }
+        body>div>p{
+            color : blue;
+        }
+        div{
+            border:1px solid red;
+        }
+/*
+        p{
+            border:1px dotted black;
+        }
+*/
+/*
+        브라우저 기본 글꼴 : 16px : 1em : 100%
+        
+        em 단위는(동적크기) 부모 크기를 기준으로 상대적으로 변화하는 단위를 말하며,
+        부모 요소에 영향을 받기 떄문에 상속개념이 적용된다.
+*/
+        
+    </style>
+</head>
+<body>
+    상속
+    <!--  여기 p는 div의 자식이라고 볼 수 있음 <P>contnets </P>-->
+    <div>
+        <p>부모요소에 적용한 스타일이 자식 요소에 연결되어 적용되는 것을 CSS 에서의 상속이라고 한다.</p>
+    </div>
+    <p>
+        CSS에서 속성은 기본적으로 하위요소에 상속되는 속성과 상속되지 않는 속성이 있다.
+    </p>
+    <p>
+        border, margin, padding, float, position 속성들은 상속되지 않는다.        
+    </p>
+<!--    p태그안에 글자를 파란색-->
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jquery-3.4.1.js">
+    </script>
+    <script>
+        // 윈도우창 객체가 메모리에 로딩된 후 실행
+        // 1. 기본 window.onload = function(){}
+        /* 2. 리스너추가 
+                    window.addEventListener('DOMContentLoaded', function(){
+                    }, false);                                                  */
+        // 3. 제이쿼리 $(document).read(익명함수);
+        // html의 구조만 먼저 로딩 후 실행
+        // 제이쿼리는 구조만 먼저 로딩되면 실행한다. DOMContentLoaded나 바디끝에 쓰는 것과 비슷한듯?
+
+        // $(document).ready(function(){});
+        $(document).ready(function(){
+            var sbox = document.querySelector("#box1");
+            console.log(sbox);
+            var box = document.getElementById('box1');
+            console.log(box);
+            var jbox = $("#box1");
+            console.log(jbox);
+            box.style.backgroundColor = "dodgerblue";
+            // id:box1 인 엘리먼트 객체를 jquery함수로 감싼 객체
+            // $("선택자").css("속성, "값");
+            $("#box2").css("background", "lightpink");
+            $("#box1, #box2").css("color", "lime");
+
+            // !
+            // jquery의 모든 함수는 실행 후 자기 자신의 객체를 리턴하도록 설계됨
+            $("#box2").css("background", "lightpink").css("color", "gray").css("display", "inline-block")
+            .css("width", "500px").css("height", "500px");
+            // $("#box2").css("width, height", "200px, 800px") 이렇겐 안되네
+            
+        });
+    </script>
+</head>
+<body>
+    <p>Hello JQuery</p>
+
+
+<!-- div#box${이부분은 id가 box$입니다.}*2 -->
+<div id="box1">이부분은 id가 box1입니다.</div>
+<div id="box2">>이부분은 id가 box2입니다.</div>
+
+
+</body>
+</html>
+
+<!-- 
+    쿼리셀렉터 정리
+document.querySelector("h1");     // 태그 선택
+document.querySelector("#id");    // id 선택
+document.querySelector(".class");    // class 선택
+document.querySelector("[title=name]");   //  타이틀이 name 인 것을 선택 
+-->

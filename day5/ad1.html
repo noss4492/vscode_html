@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+    <style>
+    #container{
+        width : 800px;
+        margin:0 auto;
+    }
+    input{
+        width:800px;
+        height:100px;
+        background: darkgoldenrod;
+        font-size: 3rem;
+        margin: 0 auto;
+        color:white;
+        weight:bold;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    img{
+        /* border:1rem solid black; */
+        width:800px;
+        margin: 0 auto;
+    }
+    </style>
+    <script>
+        var path = new Array();
+        path[0] = 'https://t1.daumcdn.net/cfile/tistory/999318455C780B5025';
+        path[1] = 'https://t1.daumcdn.net/cfile/tistory/995B3F465C780B4F2D';
+        path[2] = 'https://t1.daumcdn.net/cfile/tistory/998B47485C780B5007';
+        path[3] = 'https://t1.daumcdn.net/cfile/tistory/992258485BF20B7D14';
+        path[4] = 'https://t1.daumcdn.net/cfile/tistory/99C0AB4F5C780B5513';
+        path[5] = 'https://t1.daumcdn.net/cfile/tistory/999EC84E5C780B552E';
+        path[6] = 'https://t1.daumcdn.net/cfile/tistory/9906A84A5C780B5630';
+        path[7] = 'https://t1.daumcdn.net/cfile/tistory/9985DD475C780B572C';
+        path[8] = 'https://1.bp.blogspot.com/-XjI6UqpGsgo/XXaTgvr1yKI/AAAAAAAAIWs/zupPu4T33C8SOGWy2a8BT-o6IkhtfDGfwCLcBGAs/s1600/2.gif';
+        path[9] = 'https://t1.daumcdn.net/cfile/tistory/99BFEF455BF20B7F12';
+
+        function setImg(){
+            var p = document.getElementById("adImage");
+            p.src = path[Math.floor((Math.random()*10))];
+            // document.write("<img src="+path[Math.floor((Math.random()*10))]+">");
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+    <input type="button" value="오늘의 점심 메뉴 GIF" onclick="setImg();"><br/>
+    <img src="https://images.wallpaperscraft.com/image/national_day_of_pizza_2015_pizza_cheese_pastries_100087_3840x2160.jpg" id="adImage" width="400px">
+    <!-- <script>
+            document.write(">>"+path[0]);
+            var p = document.getElementById("adImage");
+            p.src=path[0];
+            // for(var i = 0 ; i < 9; i ++){
+            //     p.src = path[Math.floor((Math.random()*10))];
+            // }
+            document.write("<img src="+path[0]+">");
+    </script> -->
+    </div>
+</body>
+</html>

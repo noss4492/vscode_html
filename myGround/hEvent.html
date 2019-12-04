@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            font-size: 3rem;
+        }
+        h1{
+            background: #fff000;
+        }
+        .menu{
+            display:flex;
+            background: yellowgreen;
+        }
+        .menu-link{
+            margin: .5em;
+            padding: .5em;
+            color: #fff;
+            text-decoration: none;
+            background: dodgerblue;
+            list-style:none;
+        }
+        .menu-active{
+            background: orange;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id ="main-title"> Event
+    </h1>
+    <nav class="menu">
+        <a href="#" class="menu-link" data-menu="1">menu 1</a>
+        <a href="#" class="menu-link" data-menu="2">menu 2</a>
+        <a href="#" class="menu-link" data-menu="3">menu 3</a>
+    </nav>
+
+    <script>
+        // 현재 활성화된 메뉴를 담을 변수
+        // var currentMenu;
+        // var menuLinks = document.querySelectorAll('.menu-link');
+
+        // function clickMenuHandler(){    // onclick clickHandler clickListener 명칭이 이래대써
+            // console.log('click');
+            // menuLinks[1].classList.add('menu-active');
+            // this.classList.add('menu-active');
+
+            // 1. 그냥 포문돌려서 다 리무브한 후 하나 추가 / 확실하게 성능 문제
+            // for( var i = 0; i < menuLinks.length; i++){
+            //     menuLinks[i].classList.remove('menu-active');
+            // }
+            // this.classList.add('menu-active');
+
+            // 2. 해당 속성을 지닌 걸 쿼리로 찾아서 지우고 하나 추가 / 이것도 약간 성능 문제
+            // var activeMenu = document.querySelector('.menu-active');
+            // if(activeMenu){    
+            //     activeMenu.classList.remove('menu-active');
+            // }
+            // this.classList.add('menu-active');
+
+            // 3. 기억공간에 이전 클릭한 객체 저장
+            // if(currentMenu){
+            //     currentMenu.classList.remove('menu-active');
+            // }
+            // this.classList.add('menu-active');
+            // currentMenu = this;
+        // }
+        // for(var i = 0 ; i < 3; i ++){   // 이벤트리스너 많을수록 성능 불리함. 따라서 4.부터 이벤트위임으로 처리함
+        //     menuLinks[i].addEventListener('click', clickMenuHandler);
+        // }
+    </script>
+    <script>
+        var currentMenu;
+        var menu = document.querySelector('.menu');
+
+        // 이 구조가 제일 바람직함
+        // function activate(elem){
+        //     elem.classList.add('menu-active');
+        // }
+        // function inactivate(elem){
+        //     elem.classList.remove('menu-active');
+        // }
+        // function clickHandler(e){
+        //     if(currentMenu){
+        //         inactivate(currentMenu);
+        //     }
+        //     activate(e.target);
+        // }
+
+        // ex.
+        // activate(document.querySelectorAll('.menu-link')[2]);
+       
+
+        function clickHandler(e){
+            // console.log(this);
+            // console.log(e);
+            // console.log(e.currentTarget);
+            // console.log(this == e.currentTarget);
+            // console.log(e.target);
+            if(currentMenu){
+                currentMenu.classList.remove('menu-active');
+            }
+            e.target.classList.add('menu-active');
+            currentMenu = e.target;
+        }
+        menu.addEventListener('click', clickHandler);
+    </script>
+
+    <script>
+    // $('.menu-link').on('click', function(){
+    // });
+    // $('.menu').on('click', '.menu-link', function(){ // 이벤트 처리를 위임하는 방식
+    //     $(this).  //this가 각 자식들을 가르킴
+    // });
+    </script>
+
+
+<!-- 
+    <script>
+        var btn = document.querySelector('.btn');
+        var mainTitle = document.querySelector('#main-title');
+        function btnClickHandler(){
+            mainTitle.style.background = 'dodgerblue';
+        }
+        btn.addEventListener('click', btnClickHandler, false);
+        // btn.onclick = function(){
+        //     btnClickHandler;
+        //     btnClickHandler2;
+        //     btnClickHandler3;
+        // } // 그닥
+    </script>
+     -->
+</body>
+</html>

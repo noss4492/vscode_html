@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        var msg = [];
+        // var msglog = document.getElementsByName("ulEle").childNodes;
+        // console.log(">>"+msglog);
+        // console.log("log & dir of msglog"+msglog);
+        // console.dir(msglog);
+        // 초기값 <li>메뉴<li>를 어떻게 가져오나
+        //document.getElementsByName("li1")[0].firstChild.nodeValue;
+
+        // console.log("-------------");
+        // var myNode1 = document.querySelectorAll("li");
+        // console.dir(myNode1);
+
+        // var msglog = document.getElementsByName("ulEle")[0].value;
+        function prt(){
+            var msglog;//document.getElementsByName("ulEle");
+            var stdIn1 = document.getElementsByName("txt1")[0];
+            msg.push(stdIn1.value);
+            // msg = stdIn1.value;
+            // console.log(msg);
+
+            var stdOut1 = document.getElementsByName("ulEle")[0];
+            for(var i = 0 ; i < msg.length; i++){
+                msglog += "<li>"+msg[i]+"</li>";
+            }
+            stdOut1.innerHTML = msglog;        
+            // console.log(msglog);  
+        }
+    </script>
+</head>
+<body>
+    <h1>점심메뉴</h1>
+    <!-- input:text#txt+input:button -->
+    <input type="text" name="txt1" id="">
+    <input type="button" value="입력" onclick="prt();">
+    <div>
+        <ul name="ulEle" id="ulE">
+            <li name="li1">메뉴</li>
+        </ul>
+
+    </div>
+</body>
+</html>

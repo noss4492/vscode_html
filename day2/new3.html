@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+/*
+        모든 선택자의 글자색을 파랑색
+        폰트 크기는 20px
+        h1 글자 핑크
+        p 글자 빨강
+*/
+        *{color: darkblue; font-size: 20px;}
+        h1{color: lightpink;}
+        p{color:hotpink;}
+        #aaa{color:darkred}
+        #bbb{color:orangered}
+        #ccc{color:gold}
+        #ddd{color:limegreen}
+/*        이렇게 구체적으로 명시도 가능하다 ol#nav*/
+        ol#nav{
+            list-style-type:lower-roman;
+        }
+        
+        
+    </style>
+</head>
+<body>
+   <h1>id 선택자</h1>
+   <h1 style="color: red">type 선택자</h1>
+    <div style="color: deeppink; font-size: 70px; font-weight: 900; height: 100px; position: relative;">
+        HTML의 모든 요소는 ~~
+    </div>
+    <div style="color: lightpink; font-size: 70px; font-weight: 910; height: 110px; position: relative; left: 3px;  top: -95px;">
+        HTML의 모든 요소는 ~~
+    </div>
+    <div style="color:red; font-size: 70px; font-weight: 910; height: 110px; position: relative; left: 5px;  top: 0px;">
+        HTML의 모든 요소는 ~~
+    </div>
+    <div style="color:orange; font-size: 70px; font-weight: 910; height: 110px; position: relative; left: 10px;  top: -105px;">
+        HTML의 모든 요소는 ~~
+    </div>
+     <div style="color:yellow; font-size: 70px; font-weight: 910; height: 110px; position: relative; left: 15px;  top: -210px;">
+        HTML의 모든 요소는 ~~
+    </div>
+     <div style="color:green; font-size: 70px; font-weight: 910; height: 110px; position: relative; left: 20px;  top: -315px;">
+        HTML의 모든 요소는 ~~
+    </div>
+     <div style="color:blue; font-size: 70px; font-weight: 910; height: 110px; position: relative; left: 25px;  top: -420px;">
+        HTML의 모든 요소는 ~~
+    </div>
+    
+    
+   <p id="aaa">HTML의 모든 요소는 선택자로 사용 가능</p>
+   <p id="bbb">HTML의 모든 요소는 선택자로 사용 가능</p>
+   <p id="ccc">HTML의 모든 요소는 선택자로 사용 가능</p>
+   <p id="ddd">HTML의 모든 요소는 선택자로 사용 가능</p> 
+   
+   
+   
+   <ol id="nav">
+       <li>2</li>
+       <li>2</li>
+       <li>2</li>
+   </ol>
+<!--   ol#nav>li*3-->
+</body>
+</html>

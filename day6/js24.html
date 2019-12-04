@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function checkForm(x){
+            // var obj1 = document.frm.c
+            var id = document.getElementById("id");
+            console.log("id:"+id.value);
+            var ids = document.getElementsByName("userid");
+            console.dir("ids :"+ids.length);
+            console.dir("ids :"+ids[0].value);
+
+            console.log("this x : "+x);
+            console.dir(x);
+
+
+            var idX = x.form[0].value;
+            console.log("input form[0].value : "+idX);
+            // 왜 이렇게 참조 가능한지는 모르겠으나
+            // dir을 찍어보니 input이 form을 가지고 있으니 되겠지 머
+            // 생각해보니 버튼도 input이라서 그런듯함
+
+            var passwd = x.form[1].value;
+            var repw = x.form[2].value;
+            var email = x.form[3].value;
+            
+            console.log("pw"+passwd);
+            console.log("re"+repw);
+            console.log("em"+email);
+
+            if(idX == ''){
+                alert("아이디 넣어yo");
+                x.form[0].focus();
+                // return alert("XXXXXXXXX"); 
+                return; // 나를 부른 애 한테 돌아가, 나를 호출한 곳으로 돌아가
+            }else if( passwd == ''){
+                alert("pass 넣어yo");
+                x.form[1].focus();
+                return;
+            }else if( repw == ''){
+                alert("repw 넣어yo");
+                x.form[2].focus();
+                return;
+            }else if(passwd != repw){
+                alert("비밀번호 일치 안함")
+                x.form[1].value='';
+                x.form[2].value='';
+                x.form[1].focus();
+                return;
+            } else if( email.indexOf('@')==-1){
+                alert("이메일 형식이 아님");
+                x.form[3].value = '';
+                x.form[3].focus();
+                return;
+            }else if( email == ''){
+                alert("email 넣어yo");
+                x.form[3].focus();
+                return;
+            }else if( passwd.length <8){
+                alert("pw 8자 이상으로 해요");
+                x.form[1].focus();
+                return;
+            }
+            // else{
+                // 검사 통과하면 next.html에 전송
+                x.form.action="next.html";
+                // method
+                x.form.method = "get";
+                //제출
+                x.form.submit();
+            // }
+        }
+    </script>
+</head>
+<body>
+    <form action="next.html" name="frm" >
+        <table>
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" name="userid" id="id"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type="text" name="userpw" id=""></td>
+            </tr>
+            <tr>
+                <td>비밀번호확인</td>
+                <td><input type="text" name="userrepw" id=""></td>
+            </tr>
+            <tr>
+                <td>email</td>
+                <td><input type="text" name="useremail" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <!-- <input type="submit" value="전송" onclick="checkForm(this);"> -->
+                    <input type="button" value="전송" onclick="checkForm(this);">
+                    <!-- 이때 this == input -->
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

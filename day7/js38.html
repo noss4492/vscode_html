@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* canvas{
+            width:100rem;
+            height:50rem;
+            background: #aa5656;
+        } */
+    </style>
+    <script>
+        var starPath = "../images/Starsinthesky.jpg";
+        var bgImg = new Image();
+        bgImg.src="../images/canvas/bg.jpg";
+
+        var rabitImg = new Image();
+        var rabitImg2 = new Image();
+        rabitImg.src = "../images/canvas/rabbit1.png";
+        rabitImg2.src = "../images/canvas/rabbit2.png";
+
+        var ctx;
+        var counter = 0;
+        var x, y;
+        window.onload = function(){
+            var canvas = document.getElementsByName("myCanvas")[0];
+            ctx = canvas.getContext("2d");
+            // console.log(canvas);
+
+            // drawScreen();
+            // window.setTimeout(drawScreen(), 1000);
+            ctx.drawImage(bgImg, 0, 0, 800, 600);
+            window.setInterval(drawScreen, 100);
+        }
+
+        function drawScreen(){
+            counter++;
+            ctx.drawImage(bgImg, 0, 0, 800, 600);
+            console.log("cnt:"+counter);
+            if(counter%2 == 1){
+                ctx.drawImage(rabitImg, 10, 100, 50, 50);
+                // for( var i = 0 ; i < 1000; i ++)
+                //     ctx.drawImage(rabitImg, -10+1000*Math.random(), 100+i, 50, 50);
+            } else{
+                ctx.drawImage(rabitImg2, 10, 100, 50, 50);
+                // for( var i = 0 ; i < 1000; i ++)
+                //     ctx.drawImage(rabitImg2, -10+1000*Math.random(), 100+i, 50, 50);
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- <img src="../images/canvas/rabbit1.png"> -->
+    <!-- "../images/Starsinthesky.jpg" alt=""> -->
+    <canvas name="myCanvas" width="800px" height="600px">
+    </canvas>
+    
+</body>
+</html>

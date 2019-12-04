@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--    <meta name="viewport" content="width=, initial-scale=1.0">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            width: 100rem;
+            height: 25rem;
+            margin: 0 auto;
+        }
+
+        tr {
+            width: 25%;
+            border: 1px solid red;
+        }
+
+        td {
+            height: 25%;
+        }
+
+        table,
+        td {
+            border: 1px solid red;
+            border-collapse: collapse;
+        }
+
+        input {
+            width: 25rem;
+            height: 5rem;
+            font-size: 2.5rem;
+        }
+        #result{
+            text-align: right;
+            font-weight: bold;
+            font-size:5rem;
+        }
+    </style>
+    <script>
+        function inputData(v) {
+            var data = document.getElementById("result");
+            data.value += v;
+            console.log(v);
+        }
+        function cal(){
+            var data = document.getElementById("result");
+            data.value = eval(data.value)
+        }
+
+//        function outputEqual(v) {
+//            document.getElementById("result").value = eval(document.getElementById("result").value);
+//        }
+    </script>
+</head>
+
+<body>
+    <!--    table>tr(>(td>input:button)*4)*5-->
+    <table>
+        <tr>
+            <td colspan="4">
+                <input type="text" name="" id="result" style="width:99.7%">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(7);" value="7"></td>
+            <td><input type="button" onclick="inputData(8);" value="8"></td>
+            <td><input type="button" onclick="inputData(9);" value="9"></td>
+            <td><input type="button" onclick="inputData('+');" value="+"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(4);" value="4"></td>
+            <td><input type="button" onclick="inputData(5);" value="5"></td>
+            <td><input type="button" onclick="inputData(6);" value="6"></td>
+            <td><input type="button" onclick="inputData('-');" value="-"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(1);" value="1"></td>
+            <td><input type="button" onclick="inputData(2);" value="2"></td>
+            <td><input type="button" onclick="inputData(3);" value="3"></td>
+            <td><input type="button" onclick="inputData('*');" value="*"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(0);" value="0"></td>
+            <td><input type="button" onclick="inputData('00');" value="00"></td>
+            <td><input type="button" onclick="cal();" value="="></td>
+            <td><input type="button" onclick="inputData('/');" value="/"></td>
+        </tr>
+    </table>
+    
+<!-- 힝... 선생님이 야매 하지 말래.. ㅠ.ㅠ-->
+<!--
+   <table>
+        <tr>
+            <td colspan="4">
+                <input type="text" name="" id="result" style="width:99.7%">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(value);" value="7"></td>
+            <td><input type="button" onclick="inputData(value);" value="8"></td>
+            <td><input type="button" onclick="inputData(value);" value="9"></td>
+            <td><input type="button" onclick="inputData(value);" value="+"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(value);" value="4"></td>
+            <td><input type="button" onclick="inputData(value);" value="5"></td>
+            <td><input type="button" onclick="inputData(value);" value="6"></td>
+            <td><input type="button" onclick="inputData(value);" value="-"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(value);" value="1"></td>
+            <td><input type="button" onclick="inputData(value);" value="2"></td>
+            <td><input type="button" onclick="inputData(value);" value="3"></td>
+            <td><input type="button" onclick="inputData(value);" value="*"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="inputData(value);" value="0"></td>
+            <td><input type="button" onclick="inputData(value);" value="00"></td>
+            <td><input type="button" onclick="outputEqual();" value="="></td>
+            <td><input type="button" onclick="inputData(value);" value="/"></td>
+        </tr>
+    </table>
+    
+    <br />
+    그냥 만드는 두번째 테이블(클래스를 다 줄까?)
+    table>(tr>(td>input:button[onclick="inputData();" class="button_1" value="$"])*4)*5
+
+</body></html>

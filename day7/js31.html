@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var logMsg = []; // [차이점] 배열 선언  ' 3 ' ....
+        function saveData(){
+            var txt = document.getElementsByName("idtxt")[0];
+            logMsg.push(txt.value);
+            console.log(logMsg);
+            
+            txt.value = '';
+            // logMsg.push(document.getElementsByName("idtxt")[0].value);
+            // document.getElementsByClassName("idtxt")[0].value = '';
+        }
+        function printData(){
+            var msgData = '';
+            var txtArea1 = document.getElementsByName("txt2")[0];
+            for(var i = 0 ; i < logMsg.length; i++){
+                // msgData = logMsg.pop();
+                msgData += "<h2>"+logMsg[i]+"</h2>";
+                // "\r\n";
+                console.log(msgData);
+                // txtArea1.innerHTML = logMsg;
+            }
+                txtArea1.innerHTML = msgData;
+                // console.dir(txtArea1.innerHTML);
+        }
+    </script>
+</head>
+<body>
+    <!-- input:text#txt+input:button[value='저장']
+    div#txt2>h1{Test}     -->
+    <input type="text" name="idtxt" id="">
+    <input type="button" value="저장" onclick="saveData();">
+    <input type="button" value="출력" onclick="printData();">
+    <div name="txt2">
+        <h1>Test</h1>
+    </div>
+</body>
+</html>

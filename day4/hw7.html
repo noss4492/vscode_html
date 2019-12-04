@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function toMaxValue(){
+            document.getElementById("result").value = parseInt(document.getElementById("num1").value)-parseInt(document.getElementById("num2").value)>0?document.getElementById("num1").value:document.getElementById("num2").value;
+        }
+    </script>
+    <style>
+        *{
+            font-size:2.5rem;
+            text-align: center;
+            background:#047878;
+            color:#801637;
+        }
+    #container{
+        margin:2rem 2rem 2rem 2rem;
+        width:100%;
+        display:block;
+        margin:0 auto;
+        background: #FFB733;
+    }
+    input{
+        width:10rem;
+        height:10rem;
+        background: #F57336;
+    }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <input type="text" name="" id="num1">
+        <input type="button" value="VS" onclick="toMaxValue();">
+        <input type="text" name="" id="num2">
+        <br>
+        MAX
+        <br>
+        <input type="text" name="" id="result">
+</div>
+</body>
+</html>

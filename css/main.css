@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/* 
+
+내가 만든 것임
+
+가져가면 미워
+
+*/
+
+
+
+div#container {
+    width: 900px;
+    margin: auto;
+}
+
+div#header {
+    background: #FEDA84;
+    color: white;
+    height: 200px;
+}
+
+img {
+    width: 900px;
+}
+
+#sidebar1 {
+    background: #FF9B83;
+    width: 200px;
+    float: left;
+    margin-right: 10px;
+}
+
+#contents {
+    background: #976393;
+    width: 480px;
+    float: left;
+    margin-right: 10px;
+}
+
+#sidebar2 {
+    background: #685489;
+    width: 200px;
+    float: left;
+}
+
+#footer{
+    background: #43457F;
+    height:200px;
+    clear:both;
+/*            clear로 float효과 없앨 수 있음*/
+}
+#nav{
+    background-color: #FEDA84;
+}
+
+.button{
+    /* 텍스트 장식없음 */
+    text-decoration: none;
+    /* 글자 중앙 정렬 */
+    text-align: center;
+    font-size:14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px 20px;
+    color:#976393;
+    border:1px solid #976393;
+    background: #FF9B83;
+}
+
+/* 마우스가 버튼위에 올라올 때 */
+.button:hover{
+    background:#FEDA84;
+}
+
+/* 버튼을 클릭하면 */
+.button:active{
+    background: #43457F;
+    color:blue;
+    position:relative;
+    top:2px;
+}

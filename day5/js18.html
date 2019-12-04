@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+    <script>
+    var now = new Date();
+    console.log(now);
+    console.dir(now);
+    
+    var year = now.getYear();
+    console.log(year);
+
+    var year2 = now.getFullYear();
+    console.log(year2);
+    //2019
+
+    var month = now.getMonth();
+    console.log(month+1);
+
+    var day = now.getDate();
+    console.log(day);
+
+    console.log(
+    now.getFullYear()+"년"+(now.getMonth()+1)+"월"+now.getDate()+"일"
+    );
+
+    console.log(
+        now.getHours()+"시"+now.getMinutes()+"분"+now.getSeconds()+"초"
+    );
+
+    function nowTime(){
+        var now2 = new Date();
+        document.getElementById("time1").value = now2.getFullYear()+"년"+(now2.getMonth()+1)+"월"+now2.getDate()+"일"+
+        now2.getHours()+"시"+now2.getMinutes()+"분"+now2.getSeconds()+"초"
+    }
+
+    console.log("---------------------------------");
+    var str = "ABCDE";
+
+    console.log(str);
+    console.dir(str);
+    
+    // 2번부터 3글자
+    console.log(str.substr(2, 3));  
+    console.log(str.indexOf('B'));
+
+    var email = 'dagda@hanafos.com';
+    console.log( "쫘 id : "+email.substr(0, (email.indexOf('@'))) );
+
+    var friendList = "aaa, bbb, ccc, ddd, eee, fff";
+    var fList = friendList.split(",");
+    for(var i = 0; i < fList.length; i++){
+        console.log(">>"+fList[i]);
+    }
+
+    </script>
+</head>
+<body>
+
+    <input type="text" name="" id="time1">
+    <input type="button" value="지금 시간 출력하기" onclick="nowTime();">
+    
+</body>
+</html>

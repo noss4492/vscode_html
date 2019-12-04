@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/utils.js">
+    
+    window.onload = function(){
+            console.log("a");
+            function getDistance(){
+            var x1 = 100;
+            var x2 = 200;
+            var y1 = 100;
+            var y2 = 200;
+            var dis = pythagoras(x1,y1,x2,y2);
+            console.log(dis);
+            console.log("나왓! 왜 안나오나 흠...");
+            }
+        getDistance();
+    }
+    </script>
+
+<!-- 익명함수. 즉시실행함수 -->
+    <script>
+        (function (){
+            var x1 = 100;
+            var x2 = 200;
+            var y1 = 100;
+            var y2 = 200;
+            var dis = pythagoras(x1,y1,x2,y2);
+            console.log(dis);
+            console.log("이 부분은 타이틀 뒤 부분입니다. 실행. 얍");
+            console.log("=========================");
+            // console.log("나왓1");
+        })();       // ()) )() 둘 다 되는데 원래는 인자 받게 되어있어야 하는거 아닌가
+
+        (function (no){
+            for(var i = 0 ; i < no; i ++)
+                console.log("1~10 랜덤 정수"+Math.floor(Math.random()*10+1));
+        })(5);
+        
+        function printGuGuDan(num){
+            for(var i = 2; i <= 9; i ++){
+                console.log("일반함수가 출력합니다"+i*num);
+            }
+        }
+        printGuGuDan(3);
+
+        (function (num){
+            for(var i = 2 ; i <= 9; i ++){
+                console.log("익명함수가 출력합니다"+i*num);
+            }
+        })(3);
+
+        console.log("=========================");
+
+/////////////////////////////////////////////////////////////////////////////////
+
+        // Hoisiting //
+
+        // 왜 동작하는가? -> 자바스크립트에서 로딩할 때
+        // 함수 범위 내에 있는 변수들을 모두 끌어 올려서 미리 인지함
+        // 이것을 호이스팅이라고 함 Hoisting
+        // 함수내 변수를 다 끌어 올려서 선언먼저 하고 나중에 실행하도록
+
+        // 변수의 정의가 그 스코프에 따라
+        // 선언과 할당으로 분리되는 것
+
+        // 이렇게 함수마다 변수 스코프가 있으므로
+        // 즉시실행함수로 한번 쓰고 버리는 것임.
+        function showData(){
+            console.log(" 1: "+msg);
+            var msg = "H a H a H a";
+            // var msg;  //undefined 초기값을 가짐.
+            console.log(" 2: "+msg);
+            msg = null;
+            console.log(" 3: "+msg);
+            console.log(undefined == null);
+            console.log(undefined === null);
+        }
+        showData();
+        
+        console.log("=========================");
+        console.log("★ -- 모든 변수의 스코프는 함수단위임. -- ★");
+// ★☆★☆★☆★☆ -- 모든 변수의 스코프는 함수단위임. --★☆★☆★☆★☆★☆★☆
+        function showData2(){
+            if(true){
+                var msg = "메리크리스마스"; //다른 언어에서는 이게 지역변수로 잡힘.
+            }                              // 하지만 여기서는 호이스팅됨
+            console.log(msg);
+        }
+        showData2();
+
+        // 아아...
+        // 자바스크립트의 성격(한계)을 받아 들여라
+        // var -> let 우리가 알던 변수 스코프가 지정됨
+        function showData3(){
+            if(true){
+                let msg = "메리크리스마스"; //다른 언어에서는 이게 지역변수로 잡힘.
+            }                              // 하지만 여기서는 호이스팅됨
+            console.log(msg);
+        }
+        showData3();
+
+        // var : function-scoped
+        // let, const : block-scoped
+        // var은 변수 재선언 가능
+        // let 은 변수 재선언 불가능
+
+        // 즉시실행함수로 function-scope 처럼 만들 수 있음.
+        /*
+        (function() {
+            'use strict'
+            for(i=0; i<10; i++) {
+                console.log('i', i)
+            }
+        })();
+        /*
+        익명함수의 형태
+        (function () {
+            //logic
+        })();
+        */
+    
+    </script>
+    
+</head>
+<body>
+
+
+
+
+    
+
+
+
+    <script>
+        console.log("=========================");
+        console.log("이 부분은 바디의 마지막입니다. 실행. 얍");
+    </script>
+    <script>
+        function getDistance(){
+                var x1 = 100;
+            var x2 = 200;
+            var y1 = 100;
+            var y2 = 200;
+            var dis = pythagoras(x1,y1,x2,y2);  // utils.js에서 불러온 함수임
+            console.log(dis);
+            // console.log("나왓2");
+        }   
+        getDistance();
+    </script>
+</body>
+</html>

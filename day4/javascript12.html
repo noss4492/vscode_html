@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    
+    function toSum(){
+        document.getElementById("result").value = parseInt(document.getElementById("txt1").value)+
+        parseInt(document.getElementById("txt2").value); 
+    }
+    function toDiff(){
+        document.getElementById("result").value = parseInt(document.getElementById("txt1").value)-
+        parseInt(document.getElementById("txt2").value); 
+    }
+
+
+    //  선생님 풀이
+    function plus(){
+        var no1 = document.getElementById("txt1");
+        var no2 = document.getElementById("txt2");
+        
+        console.dir(no1);
+        var data1 = parseInt(no1.value);
+        var data2 = parseInt(no2.value);
+        var data3 = data1+data2;
+        // console.log(data1);
+        // no1.value=55;
+        console.log(data3);
+        var no3 = document.getElementById("result");
+        no3.value=data3;
+    }
+    function minus(){
+        var no1 = document.getElementById("txt1");
+        var no2 = document.getElementById("txt2");
+
+        var data1 = parseInt(no1.value);
+        var data2= parseInt(no2.value);
+        var data3 = data1-data2;
+        var no3 = document.getElementById("result");
+        no3.value=data3;
+    }
+
+    </script>
+</head>
+<body>
+        <!-- input:text#txt$*3 -->
+    <input type="text" name="" id="txt1">
+    <input type="text" name="" id="txt2">
+    <!-- <input type="button" value="합계" onclick="toSum();">    -->
+    <input type="button" value="합계" onclick="toDiff();">   
+    <input type="text" name="" id="result" value="">   
+    <!-- input:button[value="합계"]    -->
+</body>
+</html>

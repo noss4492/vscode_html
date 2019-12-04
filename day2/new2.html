@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 선택자</title>
+    <!--    CSS를 사용하여 h1은 빨강색 p 배경은 pink-->
+    <style>
+        body {
+            background-image: url(https://data.whicdn.com/images/296715076/original.gif)
+        }
+
+        /*        body{background-color: hotpink}*/
+
+        h1 {
+            font-size: 14px;
+        }
+
+        p {
+            background-color: pink;
+        }
+
+        * {
+            color: blue;
+            font-size: 20px;
+            font-family: D2Coding, HY견고딕, impact, sans-serif;
+        }
+    </style>
+</head>
+<script>
+    function draw() {
+        var canvas = document.getElementById("canvas1");
+        if (canvas.getContext) {
+            var cvs = canvas.getContext("2d");
+            cvs.strokeRect(50, 80, 100, 80);
+            cvs.strokeRect(50, 80, 500, 500);
+            cvs.strokeRect(50, 80, 100, 80);
+        }
+    }
+</script>
+<body onload="draw();">
+   <canvas id="canvas1" width="300" height="300">
+    </canvas>
+    <h1 style="color: red">type 선택자</h1>
+    <div style="color: deeppink; font-size: 70px; font-weight: 900; height: 100px; position: relative;">
+        HTML의 모든요소는 선택자로 사용가능
+    </div>
+    <div style="color: lightpink; font-size: 70px; font-weight: 910; height: 110px; position: relative; left: 5px;  top: -95px;">
+        HTML의 모든요소는 선택자로 사용가능
+    </div>
+
+    <!--    p{HTML의 모든요소는 선택자로 사용가능}*4-->
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <p style="color:#2233ee">HTML의 모든요소는 선택자로 사용가능</p>
+    <p style="color:#1122dd">HTML의 모든요소는 선택자로 사용가능</p>
+    <p style="color:#0011cc">HTML의 모든요소는 선택자로 사용가능</p>
+    <p style="color:#000033">HTML의 모든요소는 선택자로 사용가능</p>
+
+</body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .canvas{
+            background: #aaaaaa;
+        }
+    </style>
+    <!-- <script>
+            var bg = new Image();
+            bg.src = "../images/canvas/space.jpg";
+            window.addEventListener('DOMContentLoaded', function(){
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(bg, 0, 0, 400, 600);
+            }, false);
+    </script> -->
+    <script>
+            var bg1 = new Image();
+            var bg2 = new Image();
+            var myship = new Image();
+            shipImg = [];
+            bg1.src = "../images/canvas/space.jpg";
+            bg2.src = "../images/canvas/space.jpg";
+            for(var i = 0 ; i<8; i ++){
+                shipImg[i] = "../images/canvas/gunship"+i+".png";
+            }
+
+            bg1Y = 0;
+            bg2Y = 600;
+            myShipX = 200;
+            myShipY = 520;
+
+            counter1 = 0;
+
+            var ctx;
+            
+            window.onload = function(){
+                var canvas = document.querySelector(".myCanvas");
+                ctx = canvas.getContext("2d");
+                ctx.drawImage(bg1, 0, bg1Y, 600, 800);
+                ctx.drawImage(bg2, 0, bg2Y, 600, 800);
+                setInterval(drawCtx, 10);
+            }
+
+            function drawCtx(){
+                counter1++;
+                bg1Y -= 1;
+                bg2Y -= 1;
+                if(bg2Y == 0){
+                    bg1Y = 0;
+                    bg2Y = 600;
+                }
+                ctx.drawImage(bg1, 0, bg1Y, 600, 800);
+                ctx.drawImage(bg2, 0, bg2Y, 600, 800);
+                drawMyGunship();
+
+
+            }
+
+            function drawMyGunship(){
+                myship.src = shipImg[4+counter1%4];
+                ctx.drawImage(myship, myShipX, myShipY, 50, 50);
+            }
+
+    </script>
+</head>
+<body>
+    <canvas class="myCanvas" width="400px" height="600px"> </canvas>
+
+
+
+
+</body>
+</html>

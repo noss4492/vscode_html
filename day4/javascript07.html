@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var a = prompt("얼마까지?");
+
+        function toSum(a) {
+            var sum = 0;
+            for (var n = 1; n <= a; n++) {
+                sum += n;
+                console.log("1부터 " + a + "까지의 모든 정수의 합은 " + sum);
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <input type="button" value="출렼" onclick="toSum(a);">
+
+</body>
+
+</html>

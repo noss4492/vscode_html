@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 150px;
+            height: 150px;
+        }
+
+    </style>
+    <script>
+        function bigChange() {
+            var n = new Array(6);
+            for(var i = 0 ; i < 6; i ++){
+                n[i] = Math.floor(Math.random()*45+1);
+                for(var j = 0; j < i; j++){
+                    if(n[j] == n[i]){
+                        i--;         
+                    }
+                }
+            }
+            // var n = new Array(6);
+            // var ball = new Array(45);
+            // var tmp = 0;
+            // for (var i = 1; i <= 45; i++) {
+            //     ball[i] = i;
+            // }
+
+            // // 아 이렇게 만들기 싫은뎅...
+            // for(var j = 0; j < 9999; j ++){
+            //     for (var i = 1; i <= 45; i++) {
+            //         tmp = ball[i];
+            //         ball[i] = ball[Math.floor(Math.random()*45+1)];
+            //         ball[i+1] = tmp;
+            //     }
+            // }
+
+            // for(var i = 0 ; i < 6; i ++){
+            //     n[i] = ball[i+1];
+            // }
+
+            // console.log(n);
+            // for (var i = 0; i < 6; i++)
+            //     console.log(n[i]);
+            // console.log(ball);
+
+            // -------- random number 1~45 generated ----------------------
+
+            // -------- Selection Sort ------------------------------------
+            
+            console.log("정렬전 :"+n);
+            var tmp_n = 0;
+            var tmp_idx_min =0;
+            for(var i = 0 ; i < 6; i ++){
+                tmp_idx_min = i;
+                for(var j = i+1 ; j < 6; j ++){
+                    if(n[j] < n[tmp_idx_min]){
+                        tmp_idx_min = j;    // 가장 작은 값을 지닌 열의 인덱스가 기억됨
+                    }
+                }
+                // 위에서 기억한 가장 작은 값을 지닌 열의 인덱스와 원래 검사중인 인덱스 열을 교환
+                tmp_n = n[i];
+                n[i] = n[tmp_idx_min];
+                n[tmp_idx_min] = tmp_n;
+            }
+            // }
+            console.log("정렬후 :"+n);
+            
+            console.dir(document.getElementById);
+            for(var i = 0 ; i < 6; i ++){
+                // var id2 = "id"+String(i+1);
+                document.getElementById("id"+(i+1)).src="../images/lotto/ball"+n[i]+".png";
+            }    
+        }
+
+    </script>
+    <script>
+    // function quickSort(x, l, r){
+    //     sort(x, l, r){
+    //         if(l<r){
+    //             var p = partition(x, l, r); // set : pivot(end point)
+    //             x = sort(x, l, p-1);    // left
+    //             x = sort(x, p+1, r);    // right                
+    //         }
+    //     }
+    // }   
+    function partition(arr, l, r){
+        
+    }
+    
+    </script>
+</head>
+
+<body>
+
+    <!-- img[id="id" alt="물음표"]*6 -->
+
+    <img src="../images/icon/249014a2d008.jpg" alt="물음표" id="id1" name="n1" />
+    <img src="../images/icon/249014a2d008.jpg" alt="물음표" id="id2" name="n2" />
+    <img src="../images/icon/249014a2d008.jpg" alt="물음표" id="id3" name="n3" />
+    <img src="../images/icon/249014a2d008.jpg" alt="물음표" id="id4" name="n4" />
+    <img src="../images/icon/249014a2d008.jpg" alt="물음표" id="id5" name="n5" />
+    <img src="../images/icon/249014a2d008.jpg" alt="물음표" id="id6" name="n6" />
+    <br>
+    <input type="button" value="대밗" onclick="bigChange();">
+
+</body>
+
+</html>

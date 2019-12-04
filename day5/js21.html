@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function goGoogle(){
+            console.log("hahaha");
+            console.dir(location);
+            location.href="http://www.google.com";
+        }
+        function goNaver(){
+            location.href= "http://www.naver.com";
+        }
+    </script>
+</head>
+<body>
+    <a href="http://www.naver.com">네이버</a>
+
+    <input type="button" value="구글" onclick="goGoogle();">
+    <input type="button" value="네이버" onclick="goNaver();">
+    
+</body>
+</html>

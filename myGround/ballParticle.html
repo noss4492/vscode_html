@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Particle</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            /* 포함하는 컨텐츠가 해당 엘리먼트의 크기를 벗어났을때의 처리*/
+            width: 100%;
+        }
+
+        #wrap {
+            height: 100%;
+            width: 100%;
+        }
+
+        canvas {
+            display: block;
+            background: #030002;
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+    <script>
+        // 공이 캔버스에 느리게 움직이면서 랜덤하게 다니고
+        // 마우스의 움직임에 따른 공의 속성 변경(움직임, 색상, 크기, 형태 등등..)을 추가함.
+
+        // window.onload = function(){
+        // }
+        // 너무 표현이 느릴 수 있음.
+        var balls = [];
+        var ctx;
+        var globalCnt = 0;
+        var mX, mY;
+        var tmpDis = 0;
+        // var cwX, chy, cvX, cvY;
+        
+        // html에서 표현할 DOM Content 구조가 로딩되면 실행.
+        // 이 방식 보다도 현재는 스크립트를 아예 바디 밑에 붙이는 방법이 사용되고 있음. 
+        window.addEventListener("DOMContentLoaded", initialSetting);
+        
+
+        function initialSetting() {
+            console.log("나 잘 나오고 있나");
+            const canvas = document.querySelector('canvas'); // 아마 앞으로도 이것을 더 자주 사용할 것임.
+
+            // 렌더링 컨텍스트와 그리기 함수를 사용하기 위해
+            // 즉, getContext메서드로 드로잉 컨텍스트에 엑세스 하기 위함임.
+
+            // Strict Equal Operator === 는 null과 undefined를 엄격하게 구분해 줄 수 있다.
+            // 1=="1"은 true, 1==="1"은 false : 문자와 값의 형식까지 완벽하게 같아야만 true를 반환해줌.
+
+            // null은 값이 없는것을 명시적으로 표현한 것이고 undefined같은 경우에는 진짜 그냥 가진 값이 없는 상태인데
+            // null==undefined은 true, null===undefined는 false
+            // 실무코딩에서는 ==보다는 ===를 자주 사용할 것을 추천한다고 함.
+            if (typeof canvas.getContext === 'undefined') {
+                return;
+            }
+
+            // CanvasRenderingContext2D객체를 반환, webg이나 bitmaprenderer는 아직은 pass
+            ctx = canvas.getContext("2d");
+
+            function fitCanvasSize() {  // 이렇게 하지 않으면 그냥 늘려서 보여줘서 해상도가 낮음
+                canvas.width = document.documentElement.clientWidth;
+                canvas.height = document.documentElement.clientHeight;
+                cwX = canvas.width;
+                chY = canvas.height;
+            }
+            fitCanvasSize();
+            window.addEventListener("mousemove", mouseMoveHandler);
+            
+
+            balls = []; // 공 배열
+            density();
+            update();
+        }
+
+        function mouseMoveHandler(e){
+            mX = e.pageX;
+            mY = e.pageY;
+        }
+
+        function randNum(min, max) {
+            return (Math.floor(Math.random() * (max - min + 1)) + min);
+        }
+
+        var Coupler = function(){
+            this.r
+            this.x
+            this.y
+            this.vx
+            this.vy
+        }
+
+        var Ball = function() {
+            this.r = randNum(10, Math.floor(Math.sqrt(Math.sqrt(canvas.width*canvas.height)))*1 ); //radius
+            this.x = randNum(0 + this.r, canvas.width - this.r);
+            this.y = randNum(0 + this.r, canvas.height - this.r);
+            this.vx = randNum(-3, 3);
+            this.vy = randNum(-3, 3);
+            this.color = "rgba("+Math.random()*255+", "+Math.random()*255+", "+Math.random()*255+", 0.5)";
+            // this.opacity = Math.random();
+            this.draw = function() {
+                if(globalCnt%1==0){
+                    ctx.beginPath();
+                }
+                // ctx.lineTo(this.x+this.r+this.r, this.y+this.r+this.r);
+                // ctx.lineTo(this.x+this.r*2, this.y+this.r*2);   // line end point
+                // ctx.strokeStyle=this.color;//"#FFFFFF";
+                // ctx.moveTo(this.x+this.r, this.y+this.r);
+                // ctx.lineTo(canvas.width/2, chY);
+                // ctx.moveTo(this.x+this.r, this.y+this.r);
+                // ctx.lineTo(cwX, chY);
+                // ctx.moveTo(this.x+this.r, this.y+this.r);
+                // ctx.lineTo(cwX*0, chY);
+ 
+                // ctx.moveTo(cwX*0, 0);
+                // ctx.lineTo(this.x+this.r, this.y+this.r);
+                // ctx.moveTo(cwX/2, 0);
+                // ctx.lineTo(this.x+this.r, this.y+this.r);
+                // ctx.moveTo(cwX, 0);
+                // ctx.lineTo(this.x+this.r, this.y+this.r);
+                // ctx.stroke();
+                ctx.beginPath();
+
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.rect(this.x, this.y, this.r, this.r);
+                ctx.moveTo(this.x+this.r, this.y+this.r);
+                //  .arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                // this.color = ctx.createRadialGradient(this.x, this.y, this.r*0, this.x, this.y, this.r);
+                // this.color.addColorStop(1, '#9F0621');
+                // this.color.addColorStop(0, '#E01737');
+                ctx.shadowColor = "#FFFCFE";
+                // ctx.shadowBlur = this.r * 1.3;  //1.3;
+                
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.5;
+                ctx.closePath();
+                ctx.fill();
+            };
+            this.move = function() { // 만약 캔버스의 끝에 닿으면 반대 속도로 움직이게 설정함
+                if (this.x + this.r > canvas.width || this.x - this.r < 0) {
+                    this.vx *= -1;
+                }
+                if (this.y + this.r > canvas.height || this.y - this.r < 0) {
+                    this.vy *= -1;
+                }
+                tmpDis = Math.floor(Math.sqrt((this.x-mX)*(this.x-mX)+(this.y-mY)*(this.y-mY)));
+                if(tmpDis<=150 && tmpDis>=0){
+                    // 너무 딱딱함. vx vy를 고치는 방식으로 바꿔야할듯
+                    this.x = this.x < mX ? this.x - tmpDis/5 : this.x + tmpDis/5;
+                    this.y = this.y < mY ? this.y - tmpDis/5 : this.y + tmpDis/5;
+                    cwX = cwX < mX ? cwX - tmpDis/5 : cwX + tmpDis/5;
+                    chY = chY < mY ? chY - tmpDis/5 : chY + tmpDis/5;
+                    this.vx *= tmpDis/(150);
+                    this.vx *= -1;
+                    this.vy *= -1;
+
+                    
+                    if (this.x + this.r > canvas.width){
+                        this.vx *= -1;
+                        this.x = canvas.width-this.r;
+                    }
+                    else if(this.x - this.r < 0) {
+                        this.x = this.r
+                    }
+                    if (this.y + this.r > canvas.height){
+                        this.vy *= -1;
+                        this.y = canvas.height-this.r;
+                    }
+                    else if(this.y - this.r < 0) {
+                        this.y = this.r
+                    }
+                }
+                this.x += this.vx;
+                this.y += this.vy;
+            };
+        }
+
+        function density() {
+            var i;
+            for (i = 0; i < 100; i++) {
+                balls.push(new Ball);
+            }
+        }
+
+        function update() {
+            globalCnt++;
+            // console.log("global_cnt:"+globalCnt);
+            if(globalCnt==10000){
+                globalCnt = 0;
+            }
+            var i;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (i = 0; i < 100; i++) {
+                balls[i].draw();
+                balls[i].move();
+            }
+            setTimeout(function() { // 생성되고 나면 재귀로 무한 실행
+                update();
+            }, 30);
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <canvas id="canvas">
+        </canvas>
+    </div>
+</body>
+
+</html>
+<!-- 
+// rainbow grd
+// color.addColorStop(0, "black");
+// color.addColorStop("0.3", "magenta");
+// color.addColorStop("0.5", "blue");
+// color.addColorStop("0.6", "green");
+// color.addColorStop("0.8", "yellow");
+// color.addColorStop(1, "red");
+
+// color.addColorStop(1, '#A69C8A');
+// color.addColorStop(0.75, '#182615');
+// color.addColorStop(0.99, '#A69C8A');
+// color.addColorStop(0.0001, '#D9D9D9');
+// color.addColorStop(0, '#D9D9D9');
+
+// ctx.strokeStyle="#FFFFFF";
+// ctx.moveTo(this.x+this.r-1, this.y+this.r-1);
+// // ctx.moveTo(this.x+this.r-1, this.y+this.r-1);
+// ctx.lineTo(mX, mY);
+// ctx.stroke();
+// ctx.beginPath();
+
+// ctx.shadowColor = "#2e9dff";
+// ctx.fillStyle = color;
+// ctx.fillStyle = "rgba("+Math.random()*255+", "+Math.random()*255+", "+Math.random()*255+", 0.5)";
+// ctx.globalAlpha = this.opacity;
+
+///////////////////////////////////////////////////////////////////////
+// function fitCanvasSize(){
+// canvas.width = document.documentElement.clientWidth; //실제 컨텐츠 크기(패딩보더마진 제외)
+// canvas.height = document.documentElement.clientHeight;
+// }
+// fitCanvasSize();
+
+// setInterval(() => {
+// console.log(canvas.clientWidth+","+canvas.clientHeight);
+// }, 100);
+
+// window.onresize = fitCanvasSize;
+// window.addEventListener("resize", fitCanvasSize);
+// function fitCanvasSize(){
+// }
+///////////////////////////////////////////////////////////////////////
+// }); -->

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <!-- CDN을 이용한 설정 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+    
+    // $(function(){   //is ready -> btn1 click -> prt
+    //     $(btn1).on("click", prt);
+    // });
+
+    // function prt(){
+    //     console.log("a");
+    // }
+    var str1 = "";
+    $(function(){   //is ready -> btn1 click -> prt
+        $(btn1).on("click", function(){
+        // id가 div1인 객체 가져오기
+        // id: txt엘리먼트 객체 갖오기
+        // 사용자가 입력한 값을 브라우저 콘솔에 출력
+            // var obj1 = document.querySelector("#div1");
+            // var obj2 = document.querySelector("#txt");
+            // obj1.innerHTML = "<h1>"+obj2.value+"</h1>";
+            // document.querySelector("#div1").innerHTML = "<h1>"+document.querySelector("#txt").value+"</h1>";
+
+        // 위와 동일한 것을 jQuery로 나타낸 것
+            // $("#div1").text("aaa");
+            // $("#div1").text( $("#txt").val() );
+            str1 += "<img src='../images/animal_gif_img/WickedDevotedIndigowingedparrot-size_restricted.gif' width='200px' height='100px' alt=''>";
+            $("#div1").html("<h1>" + $("#txt").val() + "</h1>" + str1);
+            // 위 라인은 밑 라인의 이것과 같음
+            // document.querySelector("#div1").innerHTML = 
+            //                                          "<h1>"+document.querySelector("#txt").value+"</h1>";
+        });
+    });
+
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    input:text#txt+input:button#btn[value="출력"]
+    div#div1 
+    -->
+    <img src="../images/animal_gif_img/WickedDevotedIndigowingedparrot-size_restricted.gif" width="200px" height="100px" alt="">
+    <br />
+    <input type="text" name="" id="txt">
+    <input type="button" value="출력" id="btn1">
+    <div id="div1"></div>
+
+    <!-- <script>
+        function prt(){
+            var obj1 = document.querySelector('#btn1');
+            console.log(obj1);
+            obj1.addEventListener("click", function btnClickHandler(e) {
+                console.log(obj1);
+            })
+        }
+        prt();
+    </script> -->
+</body>
+</html>

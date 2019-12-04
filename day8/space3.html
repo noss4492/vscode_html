@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .canvas{
+            background: #aaaaaa;
+        }
+    </style>
+    <!-- <script>
+            var bg = new Image();
+            bg.src = "../images/canvas/space.jpg";
+            window.addEventListener('DOMContentLoaded', function(){
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(bg, 0, 0, 400, 600);
+            }, false);
+    </script> -->
+    <script>
+            var bg1 = new Image();
+            var bg2 = new Image();
+            var myship = new Image();
+            var missile1 = new Image();
+            var missile2 = new Image();
+            var enemyShip = new Image();
+            shipImg = [];
+            bg1.src = "../images/canvas/space.jpg";
+            bg2.src = "../images/canvas/space.jpg";
+            missile1.src = "../images/canvas/missile.png";
+            missile2.src = "../images/canvas/missile1.png";
+            for(var i = 0 ; i<8; i ++){
+                shipImg[i] = "../images/canvas/gunship"+i+".png";
+            }
+
+            var enemyShipArr = [];
+            var misArr = [];
+
+            bg1Y = 0;
+            bg2Y = 600;
+            myShipX = 200;
+            myShipY = 520;
+            shipSize = 50;
+
+            bgSpd = 1;
+            counter1 = 0;
+
+            var ctx;
+            
+            window.onload = function(){
+                var canvas = document.querySelector(".myCanvas");
+                ctx = canvas.getContext("2d");
+                ctx.drawImage(bg1, 0, bg1Y, 600, 800);
+                ctx.drawImage(bg2, 0, bg2Y, 600, 800);
+                setInterval(drawCtx, 10);
+
+                document.body.onkeydown = keyHandler;
+
+                canvas.addEventListener("mousemove", mouseoverHandler);
+                // canvas.addEventListener("click", mouseclickHandler);
+            }
+
+            function keyHandler(e){
+                // console.log(e);  
+                switch(e.code){
+                    case "KeyA":
+                        myShipX -= 10;
+                        break;
+                    case "KeyD":
+                        myShipX += 10;
+                        break;
+                    case "KeyW":
+                        myShipY -= 10;
+                        break;
+                    case "KeyS":
+                        myShipY += 10;
+                        break;
+                    case "Space":
+                        //미사일발사
+                        break;
+                }  
+            }
+
+            // function mouseclickHandler(e){
+            //     var h = {
+            //         x:-100,
+            //         y:-100
+            //     }
+            //     // mis
+            // }
+
+            function mouseoverHandler(e){
+                // console.log(e);
+                myShipX = e.pageX - shipSize/2;
+                myShipY = e.pageY - shipSize/2;
+            }
+
+            function drawCtx(){ // 지속적으로 실행되는 drawCtx 함수
+                counter1++;
+                bgSpd = 1.85;
+                bg1Y -= bgSpd;
+                bg2Y -= bgSpd;
+                if(bg2Y <= 0){
+                    bg1Y = 0;
+                    bg2Y = 800;
+                }
+                ctx.drawImage(bg1, 0, bg1Y, 600, 800);
+                ctx.drawImage(bg2, 0, bg2Y, 600, 800);
+
+                ctx.drawImage(missile2, 150, 400, 10, 5);
+
+                drawMyGunship();
+                drawEnemyGunship();
+                ablePositionCheck();
+
+
+            }
+
+            function drawMyGunship(){
+                if(counter1%43==0){   // 소수와의 공배수마다 한번씩 (느리게 이미지 변하게)
+                    myship.src = shipImg[7-counter1%4];
+                    // console.log(7-counter1%4);
+                }
+                ctx.drawImage(myship, myShipX, myShipY, shipSize, shipSize);
+            }
+
+            function drawEnemyGunship(){
+                var h = {
+                    x:100,
+                    y:100
+                };
+                if(enemyShipArr.length < 4){
+                    enemyShipArr.push(h);
+                }
+                
+                if(enemyShipArr.length>0){
+                    // console.log(h);
+                    // console.log(enemyShipArr);
+                    
+                    if(counter1%43==0){   // 소수와의 공배수마다 한번씩 (느리게 이미지 변하게)
+                        enemyShip.src = shipImg[3-counter1%4];
+                    }
+                    for(var i = 0 ; i < enemyShipArr.length; i ++){
+                        ctx.drawImage(enemyShip, enemyShipArr[i].x, enemyShipArr[i].y, shipSize, shipSize);
+                    }
+                }
+            }
+
+            function ablePositionCheck(){
+                // console.log("x:"+myShipX+", y:"+myShipY);
+                if(myShipX<0){
+                    myShipX = 600-shipSize;
+                }else if(myShipX > 600-shipSize){
+                    myShipX = 0;
+                }
+            }
+
+    </script>
+</head>
+<body>
+    <canvas class="myCanvas" width="600px" height="800px"> </canvas>
+
+
+
+
+</body>
+</html>

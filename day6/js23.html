@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    </style>
+    <script>
+        function printWhere(){
+            console.log("a");
+            // 이런건 없는듯 ' 3'... var obj1 = document.frm.where.selected;
+            console.dir(document.frm);
+            console.log(document.frm.where);
+            var obj1 = document.frm.where.selectedIndex;
+            console.log(obj1);
+            
+            var addrs= new Array(6);
+            addrs[1] = "http://www.popcornnews.net/23444";
+            addrs[2] = "https://m.sedaily.com/NewsVIew/1RZE00DFX6";
+            addrs[3] = "https://www.hankyung.com/finance/article/2019110568351";
+            addrs[4] = "https://ny.eater.com/2019/11/25/20982534/subway-nyc-thanksgiving-dinner-feast-stunt-l-train";
+            addrs[5] = "https://news.chosun.com/site/data/html_dir/2019/10/16/2019101600757.html";
+
+            switch(obj1){
+                case 1:
+                    location.href=addrs[1];
+                    break;
+                case 2:
+                    location.href=addrs[2];
+                    break;
+                case 3:
+                    location.href=addrs[3];
+                    break;
+                case 4:
+                    location.href=addrs[4];
+                    break;
+                case 5:
+                    location.href=addrs[5];
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>당신이 좋아하는 패스트 푸드점은?</h1>
+    <form action="" name="frm">
+        <select name="where" id="" onchange="printWhere();">
+        <option value="">------------</option>            
+        <option value="버거킹">버거키잉</option>            
+        <option value="맥도날드">막도날드</option>            
+        <option value="맘스터치">맘스토치</option>            
+        <option value="서브웨이">메인웨이</option>            
+        <option value="타코벨">타코베엘</option>            
+        </select>
+    </form>
+</body>
+</html>

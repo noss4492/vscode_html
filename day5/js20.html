@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            width:400px;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    <img src="../images/my_img/161fe4eab5efc7.gif" id="poster">
+    
+        <script>
+                for(var i = 0 ; i < 10; i++){
+                    console.log(Math.floor(Math.random()*10)+1);
+                }
+                var no = (Math.floor(Math.random()*10)+1);
+                var path = "../images/my_img/image1("+no+").jpeg"
+
+                var p = document.getElementById("poster");
+                p.src=path;
+
+                document.write("<img src="+path+" />");
+                document.write(no+"번 고양")
+
+
+                
+            </script>
+
+
+
+</body>
+</html>

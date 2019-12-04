@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url("http://img.kbs.co.kr/cms/1tv/sisa/table/view/vod/__icsFiles/artimage/2016/02/02/tablm022/51.jpg");
+        }
+        #container{
+            width:68rem;
+            height:51rem;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.7);
+            opacity: 0.9;
+
+        }
+        form>img{
+            width:15rem;
+            height:12rem;
+            margin:0.1em 0.1em 0.1em;
+        }
+        input{
+            position: relative;
+            left:1rem;
+            margin: 0 7.400rem 0;
+            width:1.5rem;
+            height:1.5rem;
+            float:left;
+        }
+        #footTxt{
+            left:-5rem;
+            width:1000px;
+            height:400px;
+        }
+        #footer{
+            font-size:1.5rem;
+        }
+        #footer>intput{
+            font-size:3rem;
+        }
+    </style>
+    <script>
+        var str;
+        function selMenu(){
+            var obj1 = document.getElementById("radioMenu1");
+            var obj2 = document.getElementById("radioMenu2");
+            var obj3 = document.getElementById("radioMenu3");
+            var obj4 = document.getElementById("radioMenu4");
+            console.log(document);
+            // console.log(document.menuFrm.food[0]);
+            if(document.menuFrm.food[0].checked){
+                 str += "당신이 선택한 메뉴는 국수입니다.";
+            } else if(document.menuFrm.food[1].checked){
+                str += "당신이 선택한 메뉴는 게장입니다.";
+            } else if(document.menuFrm.food[2].checked){
+                str += "당신이 선택한 메뉴는 삼합입니다.";
+            } else if(document.menuFrm.food[3].checked){
+                str += "당신이 선택한 메뉴는 물회입니다.";
+            }
+            document.getElementById("footTxt").value = str;
+        }
+    
+    </script>
+</head>
+
+<body>
+
+
+    <div id="container">
+            🐮오늘의 점심 메뉴🐮 <br><br>
+        <form action="" method="get" name="menuFrm">
+            <img src = "https://1.bp.blogspot.com/-XjI6UqpGsgo/XXaTgvr1yKI/AAAAAAAAIWs/zupPu4T33C8SOGWy2a8BT-o6IkhtfDGfwCLcBGAs/s1600/2.gif">
+            <img src = "https://contents.vryjam.com/HCbG5kP0GT2TNWP.gif">
+            <img src = "http://i2.linkoooo.com/1904/20190423160925_5668cc913aca499a03101dfbf5ec82b9_u1cv.gif">
+            <img src = "http://cfile204.uf.daum.net/image/252CC640593AB47B35E681">
+            <input type="radio" name="food" id="radioMenu1" onclick="selMenu()">
+            <input type="radio" name="food" id="radioMenu2" onclick="selMenu()">
+            <input type="radio" name="food" id="radioMenu3" onclick="selMenu()">
+            <input type="radio" name="food" id="radioMenu4" onclick="selMenu()">
+        </form>
+
+        <div id="footer">
+            <br><br>당신이 선택한 메뉴 : 누적해서 출력
+            <!-- <input type="text" name="" id="footTxt" style="width:1000px; height:300px;"> -->
+            <textarea name="ta" id="footTxt" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+</body>
+
+</html>

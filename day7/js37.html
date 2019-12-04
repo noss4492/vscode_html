@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: auto auto;
+            width: 70%;
+            height: 70%;
+        }
+        canvas{
+            position:absolute;
+            margin:auto auto;
+            background:pink;
+            width : 70%;
+            height: 70%;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementsByName("myCan")[0];
+            var ctx = canvas.getContext("2d");
+
+            ctx.beginPath();
+            
+            ctx.moveTo(0, 0);
+            ctx.lineTo(this.innerWidth, this.innerHeight);
+            
+            ctx.moveTo(50, 50);
+            ctx.quadraticCurveTo(50, 50, 150, 150);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(this.innerWidth, this.innerHeight);
+
+            for(var i = 0; i < 1; i ++){
+                // ctx.moveTo(i, i);
+                // ctx.quadraticCurveTo(50, 50, 150, 150);
+                // ctx.moveTo(100-i, 100-i);
+                // ctx.lineTo(this.innerWidth, this.innerHeight);
+            }
+            ctx.closePath();
+            
+            ctx.fillStyle="white";
+            ctx.fillRect(30, 30, this.innerWidth, this.innerHeight);
+
+            ctx.fillStyle="black";
+            ctx.fillRect(50, 50, 100, 100);
+
+
+            for(var i = 0 ; i < 100; i ++){
+                if(i*2-1>this.innerHeight){
+                    break;
+                }
+                ctx.fillStyle="black";
+                ctx.fillRect(0+i*2-1, 0+i*2-1, 0+i*2-1, 0+i*2-1);
+                ctx.fillStyle="pink";
+                ctx.fillRect(0+i*2, 0+i*2, 0+i*2, 0+i*2);
+            }
+            for(var i = 0 ; i < 100; i ++){
+                if(i*2-1>this.innerHeight){
+                    break;
+                }
+                ctx.fillStyle="black";
+                ctx.fillRect(600-i*2-1, 0+i*2-1, 0+i*2-1, 0+i*2-1);
+                ctx.fillStyle="pink";
+                ctx.fillRect(0+i, 0+i*2, 0+i*2, 0+i*2);
+            }
+            for(var i = 0 ; i < 100; i ++){
+                if(i*2-1>this.innerHeight){
+                    break;
+                }
+                ctx.fillStyle="black";
+                ctx.fillRect(0+i*2-1, 0+i*2-1, -50+i-1, -50+i-1);
+                ctx.fillStyle="pink";
+                ctx.fillRect(0+i*2, 0+i*2, -50+i, -50+i);
+            }
+            for(var i = 0 ; i < 100; i ++){
+                if(i*2-1>this.innerHeight){
+                    break;
+                }
+                ctx.fillStyle="black";
+                ctx.fillRect(0+i*2-1, 100+i*2-1, -50+i-1, -50+i-1);
+                ctx.fillStyle="pink";
+                ctx.fillRect(0+i*2, 100+i*2, -50+i, -50+i);
+            }
+
+            ctx.strokeStyle="pink";
+            ctx.stroke();
+
+
+
+            // var ppororo = new Image(200, 200, "../images/kuma_img/ecbaa1ecb298.jpg" );
+            var ppo1 = new Image();
+            ppo1.src = "../images/kuma_img/ecbaa1ecb298.jpg";
+            for(var i = 0 ; i < 100; i ++){
+                ctx.drawImage(ppo1, i*Math.random()*10, i*Math.random()*10, 100, 100);
+            }
+            
+            ctx.fillStyle="white";
+            var name = "분신술 쿠마";
+            ctx.font = "35px 고딕";
+            ctx.fillText("이름 :"+ name, 0, 50);
+//            ctx.drawImage(ppo1, 0, 0, 300, 300);
+//            ctx.drawImage(ppo1, 50, 50, 100, 100);
+
+        }
+    
+    </script>
+</head>
+<body>
+    <canvas name="myCan"></canvas>
+</body>
+</html>

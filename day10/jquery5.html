@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // $(function(){
+        //     $("#img").css({
+        //         "width":"300px",
+        //         "height":"300px"
+        //     });
+        // });
+        var globalCnt = 0;
+        // 제이쿼리 스타일
+        $(document).ready(function imgResize(){
+            $("#tfbtn").on("click", function(){
+                $("#img").css("width", parseInt($("#tfWidth").val())).css("height", parseInt($("#tfHeight").val()));
+            });
+        });
+
+        // 네이티브 스타일
+        window.addEventListener("DOMContentLoaded", function(){ //로드되면
+            document.querySelector("#tfbtn").addEventListener("click", function(){  //클릭이벤트주고
+                console.dir(document.querySelector("#img"));
+                document.querySelector("#img").width = document.querySelector("#tfWidth").value;
+                document.querySelector("#img").height = document.querySelector("#tfHeight").value;
+            });
+        });
+        var flag = 0;
+        setInterval(() => {
+            if(globalCnt<=500 && globalCnt>= 0){
+                globalCnt++;
+            }
+            drawImg();
+        }, 10);
+
+        function drawImg(){
+            document.querySelector("#img").width=globalCnt;
+            console.log(document.querySelector("#img").top);
+        }
+    </script>
+</head>
+<body>
+    <img src="../images/animal_gif_img/WickedDevotedIndigowingedparrot-size_restricted.gif" id="img" alt="">
+    <br />
+    width <input type="text" name="" id="tfWidth"><br />
+    height<input type="text" name="" id="tfHeight"><br />
+    <input type="button" value="변경" id="tfbtn">
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #divU1{
+            width : 20rem;
+            margin: 0px auto;
+        }
+        .userInputTxt{
+            font-size:2rem;
+        }
+        .button1{
+            width:20rem;
+            height:20rem;
+            color:#175073;
+            background: #F2EFC4;
+            font-size: 2.2rem;
+        }
+    </style>
+    <script>
+    function copy(){
+        document.getElementById("toAddr").value = document.getElementById("addr").value;
+    }
+    </script>
+</head>
+<body>
+    <div id="divU1">
+    성명 <input type="text" class="userInputTxt" name="" id=""> <br>
+    주소 <input type="text" class="userInputTxt" name="" id="addr" value="서울 종로구 율곡동 10길 105"><br>
+    <input type="button" value="배 song G 동 1" onclick="copy();" class="button1"><br>
+    배송지 <input type="text" class="userInputTxt" id="toAddr"><br>
+    </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            font-size: 3rem;
+        }
+        h1{
+            background: #fff000;
+        }
+        .myimg{
+            display:inline-block;
+            list-style: none;
+
+        }
+        .myimg img{
+            display: block;
+            width:150px;
+            height:150px;
+        }
+        .special{
+            background: pink;
+        }
+        .link-google{
+            color: red;
+        }
+
+    </style>
+
+    <!-- 요즘은 바디 끝나기 전에 스크립트를 쓰는 경향이 있다고 함. -->
+    <!-- 전체 문서가 로드가 되면 함수가 실행 -->
+<!-- 
+    <script>
+        window.onload = function(){
+            var title = document.getElementById('main-title');
+            console.log(title);
+        };
+    </script>
+-->
+<!-- 
+    <script>
+        window.addEventListener('load', function(){
+            var title = document.getElementById('main-title');
+            console.log(title);
+        }, false);
+    </script>
+-->
+    <!-- 구조만 로딩 되도 실행됨 -->
+<!--     
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            var title = document.getElementById('main-title');
+            console.log(title);
+        }, false);
+    </script>
+-->
+    <!-- <script>
+        $(document).ready(function(){   // deprecated
+        });
+        $(function(){   // 괜찮
+        });
+    </script> -->
+
+</head>
+<body>
+    <h1 id ="main-title">DOM (Document Object Model) 
+        <small>small '3'</small>
+    </h1>
+    <ul class="myimg-mom">
+        <li class="myimg">
+            <img src="../images/animal_gif_img/912fca522ad00eba102532ae1f399765.gif" alt="">
+            <a class="link-google" href="https://google.com">Google</a>
+        </li>
+            <li class="myimg"><img src="../images/animal_gif_img/black-bear-winter-gif.gif" alt=""></li>
+            <li class="myimg"><img src="../images//animal_gif_img/WickedDevotedIndigowingedparrot-size_restricted.gif" alt=""></li>
+        </ul>
+<!-- 
+    <article>
+            <span>hello 0</span>
+            <span>hello 1</span>
+            <span>hello 2</span>
+        </h1>
+        <header class="main-header">Header</header>
+        <section>
+            <header>s header</header>
+            section1
+        </section>
+        <section>
+            <header>s header</header>
+            section2
+        </section>
+    </article>    
+-->
+    
+    
+<!-- 
+    <script>
+        window.onload = function(){
+            var title = document.getElementById('main-title');
+            console.log(title);
+            var titleSpan = title.getElementsByTagName('span');
+            console.log(titleSpan[2]);
+        };
+    </script> 
+-->
+
+<!-- IE8 부터 지원, 요즘은 대부분 이렇게 쓴다고 함. -->
+<!-- 
+<script>
+    // var mainTitle = document.querySelector('#main-title');
+    // var mainTitle = document.querySelector('#main-title small');
+    // var mainTitle = document.querySelector('.myimg');   // 1번째꺼만 찍히네
+    // var myimg = document.querySelectorAll('.myimg');
+    // console.log(myimg[1]);
+
+    // for(var i = 0 ; i < myimg.length; i++){
+    //     myimg[i].style.border = '1rem solid orange';
+    // }
+</script> 
+-->
+<!-- 
+<script>
+    var link = document.querySelector('.myimg a');
+    // console.log(link.getAttribute('href'));
+    // console.log(link.getAttribute('class'));
+    // link.setAttribute('href', 'https://www.naver.com');
+    // console.log(link.getAttribute('href'));
+
+    // link.className = 'special link-google';
+    link.classList.add('special', 'foo');
+    setTimeout(function(){
+        link.classList.remove('special');
+    }, 2000);
+    console.log( link.classList.contains('special'));
+</script> 
+-->
+
+    <script>
+        var myimgmom = document.querySelector('.myimg-mom');
+        var listElem = document.createElement('li');
+        listElem.innerHTML = '<span>야야야</span>';
+        // console.log(listElem);
+        // console.log(listElem);
+        // 조립은 부모가 해주는 것
+        myimgmom.appendChild(listElem)
+    </script> 
+
+
+
+</body>
+</html>

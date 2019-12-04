@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+
+<!-- 블럭요소 , 인라인요소  (끝까지쫙인속성.ex h1/선지키는애들속성.ex img)-->
+
+<body>
+
+<!--    인라인 요소 : a, input, img , ...
+         블락 요소 : h3, p-->
+
+
+    <form action="next2.html" method="get"><br />
+        ID : <input type="text" name="id" id=""><br />
+        PW : <input type="text" name="pw" id=""><br />
+        <input type="checkbox" name="quest1" id="">1번<br />
+        <input type="checkbox" name="quest2" id="">2번<br />
+
+        <input type="radio" name="gender" id="">남<br />
+        <input type="radio" name="gender" id="">여<br />
+
+        생년월일 <input type="date" name="time" id=""><br />
+        좋아하는 메뉴<br /><br />
+        <select name="menu" id="">
+            <option value="고추잡채">고추잡채</option>
+            <option value="마파두부">마파두부</option>
+            <option value="볶음밥">볶음밥</option>
+            <option value="오므라이스">오므라이스</option>
+            <option value="깐풍기">깐풍기</option>
+        </select>
+<!--        이거 이름이 스피너래 name=value로 전달됨-->
+        
+
+        <input type="submit" value="주문하기">
+    </form>
+    <br />
+    <br />
+
+    <form action="https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8" method="get">
+        먹고 싶은 음식 : <input type="text" name="query" id="">
+        <input type="submit" value="검색">
+    </form>
+</body>
+
+</html>
+
+<!--
+        ID:input:text[name='id']
+        PW:input:text[name='pw']
+        input:checkbox[name='quest1']{1번}
+        input:checkbox[name='quest2']{2번}
+
+        input:radio[name='gender']{남}
+        input:radio[name='gender']{여}
+
+        생년월일 input:date[name=time]
+        좋아하는 메뉴<br />
+        select[name='menu']>option*5
+
+        input:submit[value='로그인']
+-->

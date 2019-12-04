@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function viewResult(){
+            console.log("dsfsdfsf");
+            // m1 이름의 id를 가진 자바스크립트 객체
+            var objm1 = document.getElementById("m1");
+            var objm2 = document.getElementById("m2");
+            var objm3 = document.getElementById("m3");
+            var objm4 = document.getElementById("m4");
+            var objm5 = document.getElementById("m5");
+
+            console.log(objm1);
+            if(objm1.checked){
+                console.log("겨울왕국2 선택됨");
+            }else if(objm2.checked){
+                console.log("나를찾아줘 선택됨");
+            }else if(objm3.checked){
+                console.log("크롤 선택됨");
+            }else if(objm4.checked){
+                console.log("블랙머니 선택됨");
+            }else if(objm5.checked){
+                console.log("허슬러 선택됨");
+            }
+            console.log("--------------------");
+
+            console.dir(document);
+            // document.frm[0];
+            console.log(">>>>>"+document.frm.movie[0].checked);
+        }
+    </script>
+</head>
+<body>
+    <!-- input:radio[name="movie"]#m$*5 -->
+    <h1>추천영화</h1>
+    <!-- 겨울왕국 -->
+    <form action="" name="frm">
+        <input type="radio" name="movie" id="m1"> 겨울왕국2
+        <input type="radio" name="movie" id="m2"> 나를찾아줘
+        <input type="radio" name="movie" id="m3"> 크롤
+        <input type="radio" name="movie" id="m4"> 블랙머니
+        <input type="radio" name="movie" id="m5"> 허슬러
+        <input type="button" value="추천" onclick="viewResult();">
+    </form>
+
+
+
+
+    
+</body>
+</html>

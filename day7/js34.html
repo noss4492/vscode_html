@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+//JSON (JavaScript Object Notation)
+//JSON (JavaScript Object Notation)은 경량의 DATA-교환 형식이다.
+//JSON (JavaScript Object Notation) is a lightweight data-interchange format.
+        var person = {};
+        // var yoon = new Object();
+        person.name = "joo yuol";
+        person.age = 20;
+        person.gender = "남";
+        console.dir(person);
+
+        var person2 = {
+            name : "6년뒤의 주열씨",
+            age : 26,
+            gender : "남",
+            job : "시크릿에이전트"
+        }
+        console.dir(person2);
+
+        function isAdult(obj){
+            var result;
+            if(obj.age>18){
+                result="성인";
+            }else{ 
+                result="미성년";
+            }
+            console.log(obj.name+"는 "+result+"입니다.");
+        }
+
+        var p = {
+            name: "펭수",
+            age:10,
+            gender :"미상",
+            job:"펭귄"
+        }
+        
+        console.log("-----------------------------");
+        isAdult(person);
+        isAdult(person2);
+        isAdult(p);
+
+
+        // 객체(비스무리하게만든것) == 속성 + 함수
+        
+        var p2 = {
+            name:"핑구",
+            age :6.5000000,
+            gender:"남",
+            job:"펭귄",
+
+            // isAdult : isAdult 요렇게 원래 있던 함수를 줘도 되고
+            isAdult : function(){
+                var result;
+                if(this.age > 18){
+                    result ="성인";
+                } else{
+                    result="미성년";
+                }
+                console.log(">>"+this.name+"는 "+result+"임다.");
+            }
+        }
+        p2.isAdult();
+        console.log("-----------------------------");
+
+        // p3객체에 자신의 정보를 담고
+        // p3.info(); 호출시
+        // 00님의 이름은 00
+        
+        var p3 = {
+            name : "제임스고슬링",
+            age : 64,
+            info : function(){
+                var result;
+                if(this.age > 60){
+                    result = "환갑을 넘긴";
+                } else{
+                    result = "안심할만한";
+                }
+                console.log(">>>>"+this.name+"씨는 "+this.age+"살이며 "+result+" 나이임");
+            }
+        }
+        p3.info();
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

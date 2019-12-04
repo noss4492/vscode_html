@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 다음 두 가지 스타일은 똑같은 한 동작을 다르게 표현한 것임.
+
+        // 1. 제이쿼리 스타일
+        $(document).ready(function useless(){   // loaded, if function is When not reusable delete it
+            $("#btn").on("click", function(){
+                // console.log($("#num1").val());           // num1의 값 
+                // console.log($("#num1").css("width"));    // num1의 css width 값
+                // var no1 = $("#num1").val();
+                // no1 = parseInt(no1)+parseInt(500);
+                // console.log(parseInt($("#num1").val()) + parseInt($("#num2").val()));
+                $("#result1").val(parseInt($("#num1").val()) + parseInt($("#num2").val()));
+            });
+        });
+
+        // 2. 네이티브(?) 자바스크립트 스타일
+        window.addEventListener('DOMContentLoaded', function(){
+            document.querySelector("#btn").addEventListener("click", function(){
+            // console.log(num1.value);                // num1의 값 
+            // console.log(num1.style.width);          // num1의 css width 값
+            document.querySelector("#result1").value =
+             parseInt(document.querySelector("#num1").value)+parseInt(document.querySelector("#num2").value)
+            });
+        }, false);
+
+
+        // 주석 제외하고 비교해보기
+        // 1. 제이쿼리 스타일
+        $(document).ready(function useless(){  
+            $("#btn").on("click", function(){
+                $("#result1").val(parseInt($("#num1").val()) + parseInt($("#num2").val()));
+            });
+        });
+        // 2. 네이티브 자바스크립트
+        window.addEventListener('DOMContentLoaded', function(){
+            document.querySelector("#btn").addEventListener("click", function(){
+            document.querySelector("#result1").value = parseInt(document.querySelector("#num1").value)+
+                                                        parseInt(document.querySelector("#num2").value)
+            });
+        }, false);
+        
+    </script>
+</head>
+<body>
+    <input type="text" name="" id="num1">+
+    <input type="text" name="" id="num2">
+    <input type="button" value="=" id="btn">
+    <input type="text" name="" id="result1">
+    
+</body>
+</html>

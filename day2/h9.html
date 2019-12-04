@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+<!--    <from action="지금 양식을 보낼 서버의 url" method="get"ㄴ보안 or "post"안보이게 >get으로 하면 쿼리 스트링이 보임. filename?id=aaa&pwd=bbb    id=aaa&pwd=bbb 이거 쿼리
+스트링임 ' ㅅ'-->
+<!--   background-image:url('');
+  
+  긴 글이나 첨부파일이 있는 경우에는 post 방시긍로 보내야함
+  255자를 넘으면 안됨...-->
+   
+<!--   get은 주소창에 값을 전달해서 보내는 거고
+   post는 육안으로 안보이게 내부에 끼워서 보내는거고-->
+    <form action="next.html" method="get" >
+<!--       <form action"https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8" method="get">-->
+        <table border="1px">
+            <tr>
+                <td>ID</td>
+                <!--            <td>input:text</td> type date,txt,password -->
+                
+                <td><input type="text" name="query" id="" placeholder="아이디를 입력하세용"></td>
+            </tr>
+            <tr>
+                <td>PW</td>
+                <td><input type="password" name="pwd" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="로그인">
+                    <!--                input:button[value='로그인']<br> submit reset
+               <form action = "지금 양식을 보낼 서버의 url"-->
+                    <input type="reset" value="다시입력">
+                    <!--                input:button[value='다시입력']-->
+                </td>
+            </tr>
+        </table>
+    </form>
+</body></html>

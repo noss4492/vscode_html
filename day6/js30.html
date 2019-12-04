@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function showTime(){
+            var t = new Date();
+            var obj1 = document.getElementById("box1");
+            var msg = t.getHours()+"시"+t.getMinutes()+"분"+t.getSeconds()+"초"+(t.getSeconds()*(360/60)+90)%360+"도";
+            obj1.innerHTML = "<h1>"+msg+"</h1>";
+            window.setTimeout(showTime, 1000);
+        }
+    </script>
+</head>
+<body onload="showTime()">  
+    <!-- onload 이 문서를 다 읽고 이 함수를 실행하시오. -->
+    <!-- () 있으면 실행하라는 뜻이고 그냥 함수명은 뭐 다른 용도로 쓰겠지 -->
+    <!-- div[id="box1"]>input:button[value="현재시간출력"] -->
+    <div id="box1">
+    </div>
+    <div>
+            <input type="button" value="현재시간출력" onclick="showTime();">
+    </div>
+    
+</body>
+</html>

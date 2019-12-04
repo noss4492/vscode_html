@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    table, td, th{
+        border:1px solid black;
+    }
+    table{
+        width:100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    th{
+        font-size:15px;
+        background: #e0bbd8;
+    }
+    td{
+        height:24px;
+    }
+    tr{
+        font-size:12px;
+        cursor: pointer;
+    }
+    #id{
+        width:10%;
+    }
+    #pw{
+        width:10%;
+    }
+    #name{
+        width:20%;
+    }
+    #email{
+        width:35%;
+    }
+    #addrs{
+        width:25%;
+    }
+    .odd{
+        background: #aa8ea9;
+    }
+    th:hover{
+        cursor:default;
+    }
+    tr:hover{
+        color:#ffffff;
+        background: #00ccff;
+        font-weight: bold;
+    }
+
+    /*  선택자
+    1. tag
+    2. #id
+    3. .class
+    4. ol>li
+    하위선택자
+    부모엘리먼트>자손엘리먼트
+    5. 유사선택자 
+       :hover, :active
+    */
+    </style>
+</head>
+<body>
+    <h1>마블캐릭터정보</h1>
+    <!-- table>(tr>th*5)+(tr>td*5)*4 -->
+    <table>
+        <tr>
+            <th id="id">ID</th>
+            <th id="pw">PW</th>
+            <th id="name">NAME</th>
+            <th id="email">EMAIL</th>
+            <th id="addrs">ADDRS</th>
+        </tr>
+        <tr>
+            <td>id1</td>
+            <td>pwd1</td>
+            <td>아이언맨</td>
+            <td>ironman@gmail.com</td>
+            <td>절벽위</td>
+        </tr>
+        <tr>
+            <td>id2</td>
+            <td>pwd2</td>
+            <td>토르</td>
+            <td>thur@gmail.com</td>
+            <td>아스가르드</td>
+        </tr>
+        <tr class="odd">
+            <td>id3</td>
+            <td>pwd3</td>
+            <td>헐크</td>
+            <td>hulk@gmail.com</td>
+            <td>뉴욕</td>
+        </tr>
+        <tr>
+            <td>id4</td>
+            <td>pwd4</td>
+            <td>캡틴마블</td>
+            <td>cap@gmail.com</td>
+            <td>마블수튜디오</td>
+        </tr>
+    </table>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function viewScore(){
+            var score = parseInt(document.getElementById("score").value);
+            var result = score>=90?"합격":"불합격"
+//            if(score>=90){
+//                result="합격";
+//            } else{
+//                result="불합격";
+//            }
+            document.getElementById("result").value = result;
+        }
+    </script>
+</head>
+<body>
+    성적입력
+    <input type="text" id="score">
+    <input type="button" value="확인" id="confirm" onclick="viewScore()">
+    
+    결과
+    <input type="text" name="" id="result">
+</body>
+</html>

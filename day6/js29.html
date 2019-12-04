@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function showDiv(){
+            console.log("a");
+            var div = document.getElementById("box1");
+            
+            // div property 확인
+            console.dir(div);
+            //Hello 글 쓰기
+            // div.innerText="<h1>Hello world</h1>";
+            div.innerHTML="<h1>Hello world</h1>";
+            div.innerHTML="<h2>Hello Java</h2>";
+            // 없는 프로퍼티에 담아버리면 그냥 추가해버리네. 널포인터에러 급구요
+
+        }
+    </script>
+</head>
+<body>
+    <!-- div[id="box"]+div>intput:button[value="출력"] -->
+    <div id="box1">
+
+    </div>
+    <div>
+        <input type="button" value="출력" onclick="showDiv();">
+    </div>
+</body>
+</html>

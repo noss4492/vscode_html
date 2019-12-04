@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container{
+            width:50rem;
+            margin:0 auto;
+        }
+        #container>img{
+            width:50rem;
+            height:50rem;
+        }
+    </style>
+    <script>
+        var tmpID = null;
+            var img_arr = ["../images/animal_gif_img/912fca522ad00eba102532ae1f399765.gif", "../images/animal_gif_img/black-bear-winter-gif.gif",
+        "../images/animal_gif_img/flex.gif", "../images/animal_gif_img/foxgiphy.gif", "../images/animal_gif_img/WickedDevotedIndigowingedparrot-size_restricted.gif"];
+        function intervalAds(){
+            
+            document.getElementsByName("mainAdsImage")[0].src = img_arr[Math.floor(Math.random()*5)];
+            // document.getElementsByName("mainAdsImage")[0].src = img_arr[Math.random()*5>2.5?2:4];
+            
+            // windows.setTimeout(intervalAds(), 100);
+            // windows.setTimeout(() => {
+            // }, timeout);
+            // window.interval({
+            // });
+        }
+        function startAds(){
+            // intervalAds();
+            tmpID = setInterval(intervalAds, 100);
+        }
+    </script>
+</head>
+<body onload="startAds()">
+    <!-- 화면 중앙에 이미지 
+    5초에 한번씩 10개중 1개 랜덤하게 출력 -->
+    <div id="container">
+        <img src="../images/animal_gif_img/ulaula.gif" alt="" name="mainAdsImage">
+    </div>
+    <!-- img_arr[0] = "../images/"" -->
+</body>
+</html>

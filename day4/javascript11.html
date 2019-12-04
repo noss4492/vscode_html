@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var txt2 = document.getElementById("txt");
+
+        function printDan(txt2) {
+            // console.log(txt2.value);
+            for (var i = 2; i <= 9; i++) {
+                console.log(parseInt(txt2.value)+"*"+i+" = "+i * parseInt(txt2.value));
+            }
+        }
+
+        function prt(){
+            var obj = document.getElementById("txt");
+            console.dir(obj);
+            console.log("obj.value : "+obj.value);
+            var no = obj.value;
+            no = parseInt(no);
+            console.log("no : "+no);
+            for(var i = 2; i <=9; i++){
+                console.log(no * i);
+            }
+        }
+// 멤버변수 => property
+    </script>
+</head>
+
+<body>
+
+    <input type="text" name="" id="txt">
+    <input type="button" value="dan" onclick="printDan(txt)">
+    <!-- <input type="button" value="dan" onclick="prt(txt)"> -->
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 멤버변수 -> 프로퍼티, 메서드 -> 함수 
+        // 객체 : Attribution(속성) + function(함수) 
+        // 요기는 좀 흥미로움
+
+        var msg = [];
+        
+        // Person p = new Person(); in java style
+
+        var person = {};
+        // var person = new Object();
+        // 자바스크립트에서는 객체를 이렇게 두가지 방법으로 생성할 수 있음. (비슷하게 흉내내는 것임)
+        console.dir(person);
+        // __proto__ Object 오브젝트기반언어(자바) vs 프로토타입기반언어(자바스크립트) 이런 느낌인듯?
+        
+        person.name = "홍길동";  // name이라는 멤버 변수가 없었음에도 이렇게 바로 추가가 가능함.
+        console.dir(person);
+
+        console.log("-----------------------");
+
+        person.name = "반장";
+        person.age = 20;
+
+        console.dir(person);
+    </script>
+    
+</head>
+<body>
+    
+</body>
+</html>
