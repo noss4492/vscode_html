@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0 auto;
+        }
+        canvas{
+            position: absolute;
+            width:100%;
+            height:100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas">
+        
+    </canvas>
+    
+    <script>
+        var canvas = document.getElementById('canvas');
+
+        if(canvas.getContext) 
+        {
+        var ctx = canvas.getContext('2d');
+        // drawEllipse(ctx, 10, 10, 100, 60);
+        // drawEllipseByCenter(ctx, 60,40,20,10);
+        }
+
+        function drawEllipseByCenter(ctx, cx, cy, w, h) {
+        drawEllipse(ctx, cx - w/2.0, cy - h/2.0, w, h);
+        }
+
+        function drawEllipse(ctx, x, y, w, h) {
+        var kappa = .5522848,
+            ox = (w / 2) * kappa, // control point offset horizontal
+            oy = (h / 2) * kappa, // control point offset vertical
+            xe = x + w,           // x-end
+            ye = y + h,           // y-end
+            xm = x + w / 2,       // x-middle
+            ym = y + h / 2;       // y-middle
+
+            ctx.strokeStyle="rgba("+Math.floor(Math.random*255)+", "+Math.floor(Math.random*255)+", "+Math.floor(Math.random*255)+", "+0.5+")";
+        ctx.beginPath();
+        ctx.moveTo(x, ym);
+        ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+        ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+        ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+        ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+        //ctx.closePath(); // not used correctly, see comments (use to close off open path)
+        ctx.stroke();
+        }
+
+
+        // 공통적인 변수
+        var posX = 0;
+        var posY = 0;
+        var maxX = 200;
+        var maxY = 200;
+        var minX = 0;
+        var minY = 0;
+        var cnt = 0;
+
+        // 1번 방법에 필요한 변수
+        var flagX = false;
+        var flagY = false;
+
+        // 2번 방법에 필요한 변수
+        var cX = maxX/2;
+        var cY = maxY/2;
+        var theta; // radian to degree
+        // tan theta = y / x
+        // theta = arctan (y / x)
+        // 중점
+        // cX = maxX/2
+        // cY = maxY/2
+        // x축 길이 : posX - cX
+        // y축 길이 : cX - posY
+        // 식에 대입
+
+        // posX posY 
+        // (-45˚ ~ +45˚)+90˚*i
+        var wX = 1; 
+        var wY = 1; 
+        
+        setInterval(() => {
+            cnt++;
+            wX = posX - cX;
+            wY = cX - posY;
+            // if(wX==0 && posY==0){
+            //     theta = 90;
+            // }else if(wX==0 && posY==200){
+            //     theta = 270;
+            // }else if(posX==0 && posY==0){
+            //     theta = 45;
+            // }else{
+            //     // theta = Math.floor(Math.atan(wY/wX)*(180.0/Math.PI));
+            //     theta = Math.floor(Math.atan2(wX/wY)*(180.0/Math.PI));
+            // }
+            theta = Math.floor(Math.atan2(posX, posY)*(180.0/Math.PI));
+            if(wX<0){   
+                theta += 180;
+            }else if(wY<0){
+                theta += 360;
+            }
+            //0우 270상 271~315하 315~359상
+
+            console.log("[x:"+posX+"][y:"+posY+"]"+"[theta:"+theta+"]");
+            
+            if(theta == 90 && posX < 200){
+                posX++;
+                if(posX == 200){
+                    posY++;
+                }
+            }else if(theta == 180 && posY < 200){
+                posY++;
+                if(posY == 200){
+                    posX++;
+                }
+            }else if(theta > 135 && theta <= 180){
+                posX--;
+            }else if(theta >= 90 && theta <= 135){
+                posY--;
+            }
+            
+            drawEllipse(ctx, 1, 1, cnt, posY+500);
+        }, 10);
+
+        // 방법1 . 플래그 두개로 4가지 경우 나누기
+        // f0 f1   0 0  우
+        // f0 f1   1 0  하
+        // f0 f1   1 1  좌 
+        // f0 f1   0 1  상
+
+        // 생각. 뭔가 자바쪽 코딩이랑 거리가 멀어보이는 모습으로 나왔음...
+        /*
+        setInterval(() => {
+            console.log("[x:"+posX+"][y:"+posY+"]");
+
+            if(flagX == false && flagY == false){
+                posX++;
+                if(posX == maxX)
+                    flagX = true;
+            }
+            else if(flagX == true && flagY == false){
+                posY++;
+                if(posY == maxY)
+                    flagY = true;
+            }
+            else if(flagX == true && flagY == true){
+                posX--;
+                if(posX == minX)
+                    flagX = false;
+            }
+            else if(flagX == false && flagY == true){
+                posY--;
+                if(posY == minY)
+                    flagY = false;
+            }
+        }, 10);
+        */
+
+
+    </script>
+</body>
+</html>

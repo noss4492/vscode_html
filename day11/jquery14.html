@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // $(document).ready(function(){
+        //     // $("input+span").css("background-color", "yellow");
+        //     $("input:not(:checked)+span").css("background-color", "yellow");
+        // });
+
+        $(document).ready(function(){
+            $("#btn1").on("click", function(){
+                // input:checked : checkbox에서 check한 선택자
+                $("input[checked]+span").css("background-color","red");
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- (div>input:checkbox[name=fruit]+span{오렌지})*3 -->
+    <div><input type="checkbox" name="fruit" id="" checked="checked"><span>오렌지</span></div>
+    <div><input type="checkbox" name="fruit" id=""><span>바나나</span></div>
+    <div><input type="checkbox" name="fruit" id=""><span>사과</span></div>
+
+    <input type="button" value="YAHO" id="btn1">
+    <!-- <div><input type="checkbox" name="fruit" id="" checked="checked"></div>
+    <div><input type="checkbox" name="fruit" id=""></div>
+    <div><input type="checkbox" name="fruit" id=""></div> -->
+    <span>오늘은 목요일</span>
+
+    <!-- 버튼을 클릭하면 체크한 항목의 span의 배경색을 red으로 변경 -->
+    
+</body>
+</html>

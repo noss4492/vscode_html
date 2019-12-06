@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+    </style>
+    <script>
+        //제이쿼리 스타일 (아 뭔가 제이쿼리 꼴뵈기 싫네)
+        $(document).ready(function(){
+            $("input[type=button]").on("click", function(e){
+                if(e.target.value == "나와요"){                     // == $('input[type=button][value="숨어요"]')
+                    $("img[alt=snowman]").show(222, function(){
+                        console.log("완료");
+                    });
+                }else{
+                    $("img[alt=snowman]").hide(222);
+                }
+            });
+        });
+
+        //네이티브 스타일
+        window.addEventListener("DOMContentLoaded", function(){
+            var btnNodeList = document.querySelectorAll('[type = button]');
+            
+            document.querySelectorAll('[type = button]')[0].addEventListener("click", function(){
+                document.querySelector('img[alt="snowman"]').style.display="none";    // show 는 jquery 이펙트였네
+            });
+            document.querySelectorAll('[type = button]')[1].addEventListener("click", function(){
+                document.querySelector('img[alt="snowman"]').style.display="block";
+            });
+        });
+
+
+        
+
+        
+    </script>
+</head>
+<body>
+    <input type="button" value="숨어요">
+    <input type="button" value="나와요">
+    <br>
+    <img style="display:none" src="http://t1.daumcdn.net/liveboard/slidee/337d13d75d4a46c594014a11b406b2b2.jpeg" alt="snowman">
+
+
+</body>
+</html>

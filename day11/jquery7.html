@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#button4div").on("click", function(e){
+            // $("#btn1, #btn2, #btn3, #btn4").on("click", function(e){
+                // var $elem = $(this);
+                // var elemid = this.id;
+                console.log(e)       
+                console.log(e.target.id); 
+                switch(e.target.id){
+                    case "btn1":
+                    case "btn2":
+                    case "btn3":
+                        $("#wrong").show();
+                        $("#answer").hide();
+                        break;
+                    case "btn4":
+                        $("#wrong").hide();
+                        $("#answer").show();
+                        break;
+                }
+            });
+        });
+
+        // $(function(){
+        //     $("#btn1, #btn2, #btn3").on("click", function(){
+        //         console.log("오답"):
+                // $("#wrong").show();
+                // $("#answer").hide();
+
+        //         $("#wrong").hide();
+        //         $("#answer").show();
+        //     })
+        // })
+    </script>
+    
+</head>
+<body>
+    <!-- input:button#btn$[value="$번"]*4 -->
+    <div id="button4div">
+        <input type="button" value="1번" id="btn1">
+        <input type="button" value="2번" id="btn2">
+        <input type="button" value="3번" id="btn3">
+        <input type="button" value="4번" id="btn4">
+    </div>
+    
+    <div>조선시대 장군, 명량, 거북선 하면 떠오르는 인물은?</div>
+    <div id="bb">
+        1. 벤브로드 2. 김두한 3. 존시나 4. 이순신
+    </div>
+    <div id="answer" style="display:none">
+        <p>정답!</p>
+    </div>
+    <div id="wrong" style="display:none">
+        <img src="http://www.joseilbo.com/gisa_img_origin/15155543301515554330_peacetech_origin.png" width="200px" alt="">
+    </div>
+
+</body>
+</html>

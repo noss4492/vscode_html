@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- jQuery -->
+    <script>
+        $(document).ready(function(){
+            $("#btn1").on("click", function(){
+                $("img").hide(333);
+            });
+            $("#btn2").on("click", function(){
+                $("img").show(333);
+            });
+            $("#btn3").on("click", function(){
+                $("img").toggle(333);
+            });
+            $("#btn4").on("click", function(){
+                $("img").fadeIn(1333);
+            });
+            $("#btn5").on("click", function(){
+                $("img").fadeOut({
+                    duration:3000,
+                    complete:function(){
+                        console.log("안녕~");
+                    }
+                });
+            });
+            $("#btn6").on("click", function(){
+                $("p").html("<h1>야야야</h1>");
+                $("p").text("Hello World").css("background", "pink").addClass("txt").appendTo(".wrapper");
+            });
+        });
+    </script>
+
+    <!-- Native -->
+    <script>
+        window.addEventListener("DOMContentLoaded", function(){
+            // var btnNodeList = document.querySelectorAll('[type = button]');
+            // console.dir(btnNodeList);
+            // document.querySelectorAll('[type = button]').addEventListener("click", function(){
+            // });
+            // 이벤트 위임 어케 해 ㅠㅠ
+
+
+            //     console.log(e.target);
+            // document.querySelectorAll('[type = button]')[0].addEventListener("click", function(){
+            //     document.querySelector('img[alt="dang"]').style.display="none";
+            // });
+            // document.querySelectorAll('[type = button]')[1].addEventListener("click", function(){
+            //     document.querySelector('img[alt="dang"]').style.display="block";
+            // });
+        });
+    </script>
+</head>
+<body>
+    <!-- input:button#btn$*6 -->
+    <input type="button" value="숨어요" id="btn1">
+    <input type="button" value="나타나요" id="btn2">
+    <input type="button" value="토글" id="btn3">
+    <input type="button" value="페이드인" id="btn4">
+    <input type="button" value="페이드아웃" id="btn5">
+    <input type="button" value="메세지출력" id="btn6">
+
+    <br>
+    <div class="wrapper">
+        <p></p>
+    </div>
+
+    <br>
+    <div>
+        <img src="../images/animal_gif_img/912fca522ad00eba102532ae1f399765.gif" alt="dang">
+    </div>
+</body>
+</html>

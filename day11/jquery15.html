@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var index = 0;
+        var timer;
+        var news=[
+            "1. 돼지 바베큐 구이 ",
+            "2. 별사탕 식혜는 군밤",
+            "3. 제임스 고슬링 유도 3관왕",
+            "4. 가는 말이 고 와! 샌즈!",
+            "5. 오늘 야간 스터디는 없습니다."
+        ];
+
+        // js jquery
+        function showNews(){
+            $("#topNews")
+            //console.dir($("#topNews"));
+            $("#topNews")[0].innerHTML="<h1>"+news[index++]+"</h1>";
+            if(index>=news.length){
+                index=0;
+            }
+        }
+        function startNews(){
+            timer = setInterval(showNews, 1000);
+            // setInterval(() => {
+            //     showNews();
+            // }, 1000);
+        }
+        $(function(){
+            $("input[value='뉴스보기']").on("click", showNews);
+            $("input[value='뉴스중지']").on("click", stopNews);
+            startNews();
+        });
+        function stopNews(){
+            clearInterval(timer);
+        }
+
+        // 네이티브 자바스크립트
+        // window.addEventListener("DOMContentLoaded", function(){
+        //     document.querySelector("[type = button]").addEventListener("click", function(){
+        //         document.querySelector("#topNews").innerHTML = "<h1>호</h1>";
+        //     });
+        // });
+
+
+
+    </script>
+</head>
+<body>
+    <div id="topNews"></div>
+    <!-- input:button[value="뉴스"]*2 -->
+    <input type="button" value="뉴스보기">
+    <input type="button" value="뉴스중지">
+</body>
+</html>

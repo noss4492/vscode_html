@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body{
+            background: black;
+        }
+        #container{
+            width:450px;
+            margin:0 auto;
+        }
+        .myStyle{
+            width:300px;
+            height:200px;
+            color:skyblue;
+            background: red;
+        }
+    </style>
+    <script>
+        // 1번 버튼을 누르면 box1의 글자색을 red
+        // 배경을 초록색, 너비 200px 높이 200px
+
+        // 2번 버튼을 누르면 사용자에게 어떤 색을 쓸 것인지 물어본 후
+        // box 1 의 배경색으로 사용
+        $(document).ready(function(){
+            $("input[type=button]").on("click", function(e){
+                switch(e.target.value){
+                    case $("#btn1").val():
+                        $("#box1").css({
+                            "color":"red",
+                            "background-color":"green",
+                            "width":"200px",
+                            "height":"400px"
+                        });
+                        break;
+                    case $("#btn2").val():
+                        var useStdInBG = prompt("원하는 배경색을 입력하시오");
+                        $("#box1").css("background-color", useStdInBG);
+                        break;
+                    case $("#btn3").val():
+                        // 아 제이쿼리 너무 싫은데 어카지 ㅠ.ㅠ
+                        var width = $("#box1").css("width");
+                        alert("width by jq : "+ width);
+                        // console.dir(document.querySelector("#box1"));
+                        alert("clientWidth : "+document.querySelector("#box1").clientWidth); // 649
+                        break;
+                    case $("#btn4").val():
+                        $("#box1").addClass("myStyle");
+                        break;    
+                    case $("#btn5").val():
+                        $("#box1").removeClass();
+                        break;    
+                    case $("#btn6").val():
+                        $("img[alt='john']").show(500);
+                        break;    
+                        case $("#btn7").val():
+                        $("img[alt='john']").hide(500);
+                        break;   
+                }
+            });
+        });
+/* 수업중 스타일
+$("#btn2").on("click", function(){
+
+})        */
+    </script>
+</head>
+<body>
+    <!-- input:button#btn$[value="btn$"]*5 -->
+    <div id="container">
+        <input type="button" value="btn1" id="btn1">
+        <input type="button" value="btn2" id="btn2">
+        <input type="button" value="btn3" id="btn3">
+        <input type="button" value="btn4" id="btn4">
+        <input type="button" value="btn5" id="btn5">
+        <input type="button" value="btn6" id="btn6">
+        <input type="button" value="btn7" id="btn7">
+
+        <!-- div#box1 -->
+        <div id="box1">존 시나~</div>
+        <div>
+            <img src="https://i.ytimg.com/vi/uKlzYKk1xpA/hqdefault.jpg" alt="john">
+        </div>
+    </div>
+</body>
+</html>

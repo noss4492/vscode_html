@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* *{
+                
+        }
+        table {
+            table-layout: auto;
+            width: 75%;
+        }
+
+        td {
+            color: dodgerblue;
+            font-weight: bold;
+        } */
+
+        .selectStyle {
+            color: red;
+            font-size: 50px;
+            background: green;
+        }
+
+        .AaA{
+            display:block;
+            background: gray;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+//        $(document).ready(function() {
+//            $("input[type='button']").on("click", function() {
+//                if(e.target.value == "btn1"){
+//                    console.log("a");
+//                } else if(e.target.value == "btn2"){
+//                    console.log("b");
+//                }
+//                $(".testClass").addClass("selectStyle");
+        // $(function(){
+        //     $(".btn1").on("click", function() {
+        //         console.log("a");
+        //         console.log($("tr"));
+        //         $("tr").addClass("selectStyle");
+        //         $("td").toggleClass("selectStyle");
+        //     });
+        //     $(".btn2").on("click", function() {
+        //         console.log("b");
+        //         $("tr:first").removeClass();
+        //     });
+        //     $(".btn3").on("click", function() {
+        //         console.log("c");
+        //         $("tr:odd").removeClass();  // tr:odd tr:even
+        //         $("tr:even").css("background-color", "pink");  // tr:odd tr:even
+        //     });
+        // });
+    </script>
+    <script>
+        $(function(){
+            console.log("aaaaa");
+            $("*").addClass("AaA");
+        })
+    </script>
+</head>
+
+<body>
+    <input type="button" class="btn1" value="1bun">
+    <input type="button" class="btn2" value="2bun">
+    <input type="button" class="btn3" value="3bun">
+    <tr class="testClass">
+        <td>one</td>
+    </tr>
+    <tr>
+        <td>two</td>
+    </tr>
+    <tr>
+        <td>three</td>
+    </tr>
+    <tr>
+        <td>four</td>
+    </tr>
+    <tr>
+        <td>five</td>
+    </tr>
+
+</body></html>

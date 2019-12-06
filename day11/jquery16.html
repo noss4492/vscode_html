@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    
+    var indexCnt=0;
+    var intervalService;
+    var movieList = [
+        "1. 쏴닉",
+        "2. 너클즈",
+        "3. 우간다",
+        "4. 테일즈",
+        "5. SEGA"
+    ];
+    var imgList = [
+        "../images/kuma_img/CoWtMkeVIAAuC8y.jpg",
+        "../images/animal_gif_img/WickedDevotedIndigowingedparrot-size_restricted.gif",
+        "../images/푸린교수님.jpg",
+        "../images/푸린우서.jpg",
+        "../images/animal_gif_img/flex.gif"
+    ]
+    function showMovieList(){
+            // console.dir(document.querySelector("img"));
+            // console.dir(document.querySelector("img").attributes[0]);
+            // console.dir(document.querySelector("img").attributes[0].nodeValue);
+        
+        // jquery 스타일
+        $("img").attr("src", imgList[indexCnt]);
+        // 네이티브 js
+        document.querySelector("img").attributes[0].nodeValue = imgList[indexCnt];
+            
+        // jquery 스타일
+        $("#banner")[0].innerHTML = "<h1>"+movieList[indexCnt]+"</h1>";
+        // 네이티브 js
+        document.querySelector("#banner").innerHTML = "<h1>"+movieList[indexCnt]+"</h1>";
+
+        indexCnt++;
+        if(indexCnt>=movieList.length){
+            indexCnt=0;
+        }
+    }
+    function startBanner(){
+        intervalService = setInterval(() => {
+            showMovieList();
+        }, 2000);
+    }
+    function stopBanner(){
+        clearInterval(intervalService);
+    }
+    
+    $(document).ready(function(){
+        $("input[type='button']").on("click", function(e){
+            switch(e.target.value){
+                case "상영 영화 보기":
+                    $("div").html("<h2>영화목록</h2>");
+                    startBanner();
+                    showMovieList();
+                    break;
+                case "중지":
+                    stopBanner();
+                    break;
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    
+    <div id="banner">
+    </div>
+    <img src="" alt="">
+    <br>
+    <input type="button" value="상영 영화 보기">
+    <input type="button" value="중지">
+    
+</body>
+</html>

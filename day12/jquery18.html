@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        #content{
+            width:1000px;
+            height:600px;
+            background: pink;
+            padding: 20px 0 20px 0;
+        }
+        #movie{
+            width:200px;
+            height:300px;
+            border:5px solid white;
+            position: absolute;
+            left:50px;
+            top:180px;
+            padding:20px;
+            background: #000000;
+            display:none;
+        }
+        img{
+           width:200px;
+           height:200px; 
+        }
+    </style>
+    <script>
+        // $(function(){
+        //     console.log("$(movie)");
+        // });
+
+        // $(document).read(function(){
+
+        // });
+
+        // window.addEventListener("DOMContentLoaded", function(){
+        //     document.querySelector("").addEventListener("click", function(){
+        //     });
+        // });
+
+        function showdiv(){
+            $("#movie").show();
+            // var a = document.querySelector("a[href='javascript:hidediv();']");
+            // 
+            // });
+            console.dir(a);
+        }
+        function hidediv(){
+            $("movie").hide();
+        }
+    </script>
+</head>
+<body>
+    <div id="movie">
+        <div><a href="javascript:hidediv();">닫기</a></div>
+        <img src="../images/푸린교수님.jpg" alt="">
+    </div>
+    <!-- div#content>h1{}+p -->
+    <div id="content">
+        <h1>피카DIV</h1>
+        <p>저희 영화관은 멀티플렉스 극장이지만 관이 하나밖에 없어요</p>
+        <a href="javascript:showdiv();">상영영화정보</a>
+        <!-- <a href="javascript:함수명()"> 이러면 외부에 있는 자바스크립트 사용 가능-->
+    </div>
+</body>
+</html>
