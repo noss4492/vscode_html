@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 글자를 원의 중심에 있도록 만들어야할듯. */
+        *{
+            margin:0 0;
+            padding: 0 0;
+            width:100%;
+            height:100%;
+        }
+        /* canvas {
+            display:none;
+            opacity: 1.0;
+            background: rgba(0,0,0, 0);
+            width: 100%;
+            height: 100%;
+        } */
+        /* 
+        .test:nth_child(3){
+            color:blue;
+        }
+        .test:nth-child(2){
+            background:red;
+        }
+
+         */
+        #wrapper{
+            width:100%;
+            height:100%;
+            /* background: white; */
+            /* border: 5px gray solid; */
+            padding: 1rem 1rem;
+            position:absolute;
+            /* top:-2rem; */
+            left:-0.5rem;
+            /* text-align: center; */
+        }
+        .box{
+            position:absolute;
+            float:left;
+            color:black;
+            font-size:5rem;
+            font-weight: bold;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            /* border:1px white solid; */
+            width:5rem;
+            height:5rem;
+            /* margin: 16px 8px; */
+            
+        }
+        /* .box:nth-child(7n+1){
+            color:red;
+            background: rgba(200,0,0, 0.1);
+        }
+        .box:nth-child(25){
+            color:red;
+            background: rgba(200,0,0, 0.1);
+        }
+        .box:nth-child(7n){
+            color:dodgerblue;
+            background: rgba(30,144,255, 0.1);
+        } */
+
+        small{
+            font-size: 0.44rem;
+            letter-spacing: -1.2px;
+        }
+
+    </style>
+    <script>
+        var cnt = 0;
+        var mx;
+        var my;
+        var boxArr;
+        window.addEventListener("DOMContentLoaded", initSet);
+
+        var maxWeight;
+        var maxHeight;
+
+        function initSet(){
+            boxArr = document.querySelectorAll(".box");
+            body = document.querySelector("body");
+            window.addEventListener("mousemove", mouseMoveHandler);
+            setInterval(() => {
+                cnt++;
+                update();
+            }, 10);
+
+            function fitCanvasSize() {  // 이렇게 하지 않으면 그냥 늘려서 보여줘서 해상도가 낮음
+                maxWeight = document.documentElement.clientWidth;
+                maxHeight = document.documentElement.clientHeight;
+            }
+            fitCanvasSize();
+        }
+
+        function mouseMoveHandler(e){
+            mx = e.pageX;
+            my = e.pageY;
+        }
+
+        var a = 9.8;
+
+        function update(){
+            // console.dir(boxArr);
+            for(var i = 0 ; i < boxArr.length; i++){
+                dis = Math.sqrt((boxArr[i].offsetLeft+15 - mx)*(boxArr[i].offsetLeft+15 - mx)+
+                (boxArr[i].offsetTop+15 - my)*(boxArr[i].offsetTop+15 - my));
+                // console.log(dis);
+                // console.log(boxArr[i].left);
+                // console.dir(boxArr[i]);
+                // boxArr[i].left= i*100;
+                boxArr[i].style.left=i*100+"px";
+                if(boxArr[i].style.top>=maxHeight){
+                    boxArr[i].style.top=0;
+                }else{
+                    boxArr[i].style.top=i*100+cnt*9.8+"px";
+                }
+                if(dis <= 150){
+                    // console.log(boxArr[0].style.fontSize);
+                    // boxArr[i].style.color = "red";
+                    boxArr[i].style.color = "rgba("+(dis/2+180)+", "+mx+", "+Math.abs(
+                                    (mx*2-(document.body.clientWidth/2))*(my/2-document.body.clientHeight/2)/
+                                    (document.body.clientWidth*document.body.clientHeight/4)
+                                    )*255+", "+Math.abs(
+                                    (mx*2-(document.body.clientWidth/2))*(my/2-document.body.clientHeight/2)/
+                                    (document.body.clientWidth*document.body.clientHeight/4)
+                                    )*255+")";
+                    boxArr[i].style.fontSize = (150/dis)*100+"%";
+                    //(dis+(boxArr[i].offsetLeft+15 - mx)) 값이 안 잡히는듯
+                } else if(dis <= 350){
+                    boxArr[i].style.color = "rgba("+Math.abs(
+                                    (mx*2-(document.body.clientWidth/2))*(my/2-document.body.clientHeight/2)/
+                                    (document.body.clientWidth*document.body.clientHeight/4)
+                                    )*255+", "+my+", "+(dis/2)+", "+(Math.abs(
+                                    (mx*2-(document.body.clientWidth/2))*(my/2-document.body.clientHeight/2)/
+                                    (document.body.clientWidth*document.body.clientHeight/8)
+                                    )*255)+")";
+                                    boxArr[i].style.fontSize = dis*2.5+"%";
+                }
+                // 글자 기준 거리로 배경색
+                // body.style.background = "rgba("+(dis+(boxArr[i].offsetLeft+15 - mx))+", "+(dis+(boxArr[i].offsetTop+15 - my))+", "+(dis+(boxArr[i].offsetTop+15 - my))+", "+dis/250+")";
+                // 중앙 기준 거리로 배경색
+                body.style.background = "rgba("+(mx/1*255/document.body.clientWidth)+
+                                ", "+(my/2*255/document.body.clientWidth)+", "+(my/2*255/document.body.clientWidth)+
+                                ", "+Math.abs(
+                                    (mx-(document.body.clientWidth/2))*(my-document.body.clientHeight/2)/
+                                    (document.body.clientWidth*document.body.clientHeight/4)
+                                    )+")";
+            //     console.log(window.clientWidth);
+            //     console.log(window.clientHeight);
+            // console.log(Math.abs(
+            //         (mx-(window.clientWidth/2))*(my-window.clientHeight/2)
+            // ));
+                // body.style.background = "rgba("+255/dis+", "+255/dis+", "+255/dis+", 0.5)";
+                // boxArr[i].mx += dis;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <!-- div#wrapper>div[class="box"]{$}*31 -->
+    <div id="wrapper">
+            <!-- (div[class="box"]{0}+div[class="box"]{1})*10 -->
+            <!-- (div[class="box"]{$}*9) -->
+        <!-- div[class="box"]{$}*9 -->
+        <!-- <h1 style="text-align: center">2019.12</h1> -->
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box">8</div>
+        <div class="box">9</div>
+        <div class="box">10</div>
+        <div class="box">11</div>
+        <div class="box">12</div>
+        <div class="box">13</div>
+        <div class="box">14</div>
+        <div class="box">15</div>
+        <div class="box">16</div>
+        <div class="box">17</div>
+        <div class="box">18</div>
+        <div class="box">19</div>
+        <div class="box">20</div>
+        <div class="box">21</div>
+        <div class="box">22</div>
+        <div class="box">23</div>
+        <div class="box">24</div>
+        <div class="box">25</div>
+        <div class="box">26</div>
+        <div class="box">27</div>
+        <div class="box">28</div>
+        <div class="box">29</div>
+        <div class="box">30</div>
+        <div class="box">31</div>
+        <div class="box">32</div>
+        <div class="box">33</div>
+        <div class="box">34</div>
+        <div class="box">35</div>
+        <div class="box">36</div>
+        <div class="box">37</div>
+        <div class="box">38</div>
+        <div class="box">39</div>
+        <div class="box">40</div>
+        <div class="box">41</div>
+        <div class="box">42</div>
+        <div class="box">43</div>
+        <div class="box">44</div>
+        <div class="box">45</div>
+        <div class="box">46</div>
+        <div class="box">47</div>
+        <div class="box">48</div>
+        <div class="box">49</div>
+        <div class="box">50</div>
+        <div class="box">51</div>
+        <div class="box">52</div>
+        <div class="box">53</div>
+        <div class="box">54</div>
+        <div class="box">55</div>
+        <div class="box">56</div>
+        <div class="box">57</div>
+        <div class="box">58</div>
+        <div class="box">59</div>
+        <div class="box">60</div>
+        <div class="box">60</div>
+        <div class="box">61</div>
+        <div class="box">62</div>
+        <div class="box">63</div>
+        <div class="box">64</div>
+        <div class="box">65</div>
+        <div class="box">66</div>
+        <!-- <div class="box">67</div>
+        <div class="box">68</div>
+        <div class="box">69</div>
+        <div class="box">70</div>
+        <div class="box">71</div>
+        <div class="box">72</div>
+        <div class="box">73</div>
+        <div class="box">74</div>
+        <div class="box">75</div>
+        <div class="box">76</div>
+        <div class="box">77</div>
+        <div class="box">78</div>
+        <div class="box">79</div>
+        <div class="box">80</div>
+        <div class="box">81</div>
+        <div class="box">82</div>
+        <div class="box">83</div>
+        <div class="box">84</div>
+        <div class="box">85</div>
+        <div class="box">86</div>
+        <div class="box">87</div>
+        <div class="box">88</div>
+        <div class="box">89</div>
+        <div class="box">90</div>
+        <div class="box">91</div>
+        <div class="box">92</div>
+        <div class="box">93</div>
+        <div class="box">94</div>
+        <div class="box">95</div>
+        <div class="box">96</div>
+        <div class="box">97</div>
+        <div class="box">98</div>
+        <div class="box">99</div>
+        <div class="box">100</div> -->
+    </div>
+    
+</body>
+</html>
